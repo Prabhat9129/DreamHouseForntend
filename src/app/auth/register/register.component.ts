@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthServiceService } from '../auth-service.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Router } from '@angular/router';
 // import { FormGroup } from '@angular/forms';
 // import { ActivatedRoute, Router } from '@angular/router';
 
@@ -16,7 +17,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class RegisterComponent implements OnInit {
   registerdata: any = { name: null, email: null, password: null, role: null };
   error: string = '';
-
+  isRegistationSuccess = false;
   private subError: Subscription;
 
   ngOnInit(): void {
@@ -27,16 +28,10 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient,
+    private router: Router,
     private service: AuthServiceService
   ) {}
-  show() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Message Content',
-    });
-  }
+
   onSubmit(forms: NgForm) {
     console.log(forms);
     this.registerdata.name = forms.form.value.name;
@@ -46,7 +41,16 @@ export class RegisterComponent implements OnInit {
     const { name, email, password, role } = this.registerdata;
 
     this.service.register({ name, email, password, role });
-    this.show();
+    this.isRegistationSuccess = true;
+
+    // this.router.navigate(['/login']);
+  }
+  show() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Registration successfully',
+    });
   }
   ngOnDestroy() {
     this.subError.unsubscribe();

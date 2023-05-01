@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ToastModule } from 'primeng/toast';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,9 +23,10 @@ import { PropertyComponent } from './property/property.component';
     PropertyComponent,
   ],
   imports: [
-    ToastModule,
     BrowserModule,
     BrowserAnimationsModule,
+
+    ToastrModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

@@ -1,17 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { post, log } from './post.model';
-import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+
+export interface AuthResponseData {
+  status: string;
+  statuscode: number;
+  message: string;
+  utoken: string;
+  user?: {};
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
-  private user = new Subject<any>();
+  user = new Subject<any>();
   error = new Subject<any>();
   data = this.user.asObservable();
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(private http: HttpClient) {}
 
   register({ name, email, password, role }: post) {
     const postdata: post = {
@@ -21,30 +28,28 @@ export class AuthServiceService {
       role: role,
     };
 
-    this.http.post<any>('http://localhost:8000/signup', postdata).subscribe(
-      (responsedata) => {
-        console.log(responsedata);
-        const dataWithMessage = {
-          data: responsedata.user,
-          message: responsedata.message,
-        };
-        // this.toastr.success(responsedata.message);
-        this.user.next(dataWithMessage);
-      },
-      (err) => {
-        console.log(err);
-        if (err.error.status === 'Error') {
-          // this.toastr.error(err.error.message);
-          this.error.next(err.error.message);
-        } else if (err.error) {
-          // this.toastr.error(err.error);
-          this.error.next(err.error);
-        } else {
-          // this.toastr.error('Unknow Error!');
-          this.error.next('Unknow Error!');
-        }
-      }
-    );
+    return this.http.post<any>('http://localhost:8000/signup', postdata);
+    // .subscribe(
+    //   (responsedata) => {
+    //     console.log(responsedata);
+    //     const dataWithMessage = {
+    //       data: responsedata.user,
+    //       message: responsedata.message,
+    //     };
+
+    //     this.user.next(dataWithMessage);
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //     if (err.error.status === 'Error') {
+    //       this.error.next(err.error.message);
+    //     } else if (err.error) {
+    //       this.error.next(err.error);
+    //     } else {
+    //       this.error.next('Unknow Error!');
+    //     }
+    //   }
+    // );
   }
 
   login({ email, password }: log) {
@@ -52,14 +57,6 @@ export class AuthServiceService {
       email: email,
       password: password,
     };
-
-    this.http.post<any>('http://localhost:8000/signin', logdata).subscribe(
-      (responsedata) => {
-        console.log(responsedata);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    return this.http.post<any>('http://localhost:8000/signin', logdata);
   }
 }

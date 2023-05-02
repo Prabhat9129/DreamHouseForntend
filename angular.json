@@ -22,14 +22,17 @@
               "src/Clientassets/favicon.ico",
               "src/assets/Clientassets"
             ],
-            "styles": ["./src/styles.css"],
+            "styles": [
+              "./src/styles.css",
+              "src/assets/Clientassets/revolution/css/layers.css",
+              "src/assets/Clientassets/revolution/css/navigation.css",
+              "src/assets/Clientassets/revolution/css/settings.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/square-jelly-box.css"
+            ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/Clientassets/js/bootstrap.min.js",
-              "src/assets/Clientassets/js/jquery.validate.min.js",
-              "src/assets/Clientassets/js/mmenu.min.js",
-              "src/assets/Clientassets/js/moment.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {

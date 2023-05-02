@@ -1,17 +1,142 @@
-<section class="headings">
-  <div class="text-heading text-center">
-    <div class="container">
-      <h1>Find Houses</h1>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<div id="tab-1" class="tab-contents">
+  <div class="custom-form">
+    <form method="post" name="registerform">
+      <label>Username or Email Address * </label>
+      <input name="email" type="text" onClick="this.select()" value="" />
+      <label>Password * </label>
+      <input name="password" type="password" onClick="this.select()" value="" />
+      <button type="submit" class="log-submit-btn">
+        <span>Log In</span>
+      </button>
+      <div class="clearfix"></div>
+      <div class="filter-tags">
+        <input id="check-a" type="checkbox" name="check" />
+        <label for="check-a">Remember me</label>
+      </div>
+    </form>
+    <div class="lost_password">
+      <a href="#">Lost Your Password?</a>
     </div>
   </div>
-</section>
+</div>
+
+<div class="login-and-register-form modal">
+  <div class="main-overlay"></div>
+  <div class="main-register-holder">
+    <div class="main-register fl-wrap">
+      <div class="close-reg"><i class="fa fa-times"></i></div>
+      <h3>
+        Welcome to <span>Find<strong>Houses</strong></span>
+      </h3>
+      <div class="soc-log fl-wrap">
+        <p>Login</p>
+        <a href="#" class="facebook-log"
+          ><i class="fa fa-facebook-official"></i>Log in with Facebook</a
+        >
+        <a href="#" class="twitter-log"
+          ><i class="fa fa-twitter"></i> Log in with Twitter</a
+        >
+      </div>
+      <div class="log-separator fl-wrap"><span>Or</span></div>
+      <div id="tabs-container">
+        <ul class="tabs-menu">
+          <li class="current"><a href="#tab-1">Login</a></li>
+          <li><a href="#tab-2">Register</a></li>
+        </ul>
+        <div class="tab">
+          <div id="tab-1" class="tab-contents">
+            <div class="custom-form">
+              <form method="post" name="registerform">
+                <label>Username or Email Address * </label>
+                <input
+                  name="email"
+                  type="text"
+                  onClick="this.select()"
+                  value=""
+                />
+                <label>Password * </label>
+                <input
+                  name="password"
+                  type="password"
+                  onClick="this.select()"
+                  value=""
+                />
+                <button type="submit" class="log-submit-btn">
+                  <span>Log In</span>
+                </button>
+                <div class="clearfix"></div>
+                <div class="filter-tags">
+                  <input id="check-a" type="checkbox" name="check" />
+                  <label for="check-a">Remember me</label>
+                </div>
+              </form>
+              <div class="lost_password">
+                <a href="#">Lost Your Password?</a>
+              </div>
+            </div>
+          </div>
+          <div class="tab">
+            <div id="tab-2" class="tab-contents">
+              <div class="custom-form">
+                <form
+                  method="post"
+                  name="registerform"
+                  class="main-register-form"
+                  id="main-register-form2"
+                >
+                  <label>First Name * </label>
+                  <input
+                    name="name"
+                    type="text"
+                    onClick="this.select()"
+                    value=""
+                  />
+                  <label>Second Name *</label>
+                  <input
+                    name="name2"
+                    type="text"
+                    onClick="this.select()"
+                    value=""
+                  />
+                  <label>Email Address *</label>
+                  <input
+                    name="email"
+                    type="text"
+                    onClick="this.select()"
+                    value=""
+                  />
+                  <label>Password *</label>
+                  <input
+                    name="password"
+                    type="password"
+                    onClick="this.select()"
+                    value=""
+                  />
+                  <button type="submit" class="log-submit-btn">
+                    <span>Register</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="login">
   <div class="login">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-      <div class="alert alert-success" *ngIf="isloggedin">
-        <span class="form-success">logged in successfully!</span>
-      </div>
       <div class="form-group">
         <label>Your Email</label>
         <input
@@ -33,7 +158,6 @@
           name="password"
           id="password1"
           ngModel
-          email
           required
           minlength="7"
           #password="ngModel"
@@ -42,7 +166,7 @@
           >Password is Required</span
         >
       </div>
-      
+
       <div id="pass-info" class="clearfix"></div>
       <button
         type="submit"
@@ -51,6 +175,7 @@
       >
         Login now!
       </button>
+
       <div class="text-center add_top_10">
         Don`t have an Account?
         <strong

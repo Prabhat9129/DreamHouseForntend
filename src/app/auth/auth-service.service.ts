@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { post, log } from './post.model';
 import { Subject } from 'rxjs';
@@ -29,27 +29,6 @@ export class AuthServiceService {
     };
 
     return this.http.post<any>('http://localhost:8000/signup', postdata);
-    // .subscribe(
-    //   (responsedata) => {
-    //     console.log(responsedata);
-    //     const dataWithMessage = {
-    //       data: responsedata.user,
-    //       message: responsedata.message,
-    //     };
-
-    //     this.user.next(dataWithMessage);
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //     if (err.error.status === 'Error') {
-    //       this.error.next(err.error.message);
-    //     } else if (err.error) {
-    //       this.error.next(err.error);
-    //     } else {
-    //       this.error.next('Unknow Error!');
-    //     }
-    //   }
-    // );
   }
 
   login({ email, password }: log) {
@@ -58,5 +37,26 @@ export class AuthServiceService {
       password: password,
     };
     return this.http.post<any>('http://localhost:8000/signin', logdata);
+  }
+
+  //Retrieve the token from local storage
+
+  updatepassword() {
+    let token = localStorage.getItem('token');
+    console.log(token);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    console.log(headers);
+    this.http
+      .patch('http://localhost:8000/PasswordUpadte', { headers })
+      .subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 }

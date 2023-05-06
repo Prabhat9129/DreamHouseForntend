@@ -8,3 +8,9 @@ export interface log {
   email: string;
   password: string;
 }
+
+export interface updatepassword {
+  currentpassword: string;
+  newpassword: string;
+  conformpassword: string;
+}

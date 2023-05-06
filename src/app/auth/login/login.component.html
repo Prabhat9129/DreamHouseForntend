@@ -4,7 +4,12 @@
   color="#fff"
   type="ball-scale-multiple"
 >
-  <p style="font-size: 20px; color: white">Loading...</p>
+  <!-- <p style="font-size: 20px; color: white">Loading...</p> -->
+  <div id="preloader">
+    <div id="status">
+      <div class="status-mes"></div>
+    </div>
+  </div>
 </ngx-spinner>
 <div class="bg-image">
   <section class="vh-100">
@@ -64,13 +69,15 @@
             <div id="pass-info" class="clearfix"></div>
             <button
               type="submit"
-              class="btn btn-primary btn-lg btn-block"
+              class="btn-primary btn-lg btn-block"
               [disabled]="!f.valid"
             >
               Login
             </button>
             <div class="d-flex justify-content-left mb-4">
-              <a style="cursor: pointer">Forgot password?</a>
+              <a style="cursor: pointer" routerLink="/forgotpassword"
+                >Forgot password?</a
+              >
             </div>
             <div class="text-center add_top_10 mb-5">
               Don`t have an Account?

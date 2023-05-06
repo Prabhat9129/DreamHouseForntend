@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { post, log } from './post.model';
+import { post, log, updatepassword } from './post.model';
 import { Subject } from 'rxjs';
 
 export interface AuthResponseData {
@@ -41,22 +41,40 @@ export class AuthServiceService {
 
   //Retrieve the token from local storage
 
-  updatepassword() {
+  updatepassword({ currentpassword, newpassword, conformpassword }: any) {
+    const updatepass: updatepassword = {
+      currentpassword: currentpassword,
+      newpassword: newpassword,
+      conformpassword: conformpassword,
+    };
     let token = localStorage.getItem('token');
     console.log(token);
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `${token}`,
     });
-    console.log(headers);
-    this.http
-      .patch('http://localhost:8000/PasswordUpadte', { headers })
-      .subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+
+    return this.http.patch('http://localhost:8000/PasswordUpadte', updatepass, {
+      headers,
+    });
+  }
+
+  forgotpassword({ email }: any) {
+    console.log(email);
+    const useremail: any = { email: email };
+    console.log(useremail);
+    return this.http.post('http://localhost:8000/forgotpassword', useremail);
+  }
+
+  resetpassword({ newpassword, conformpassword, token }: any) {
+    const resetdata: any = {
+      newpassword: newpassword,
+      conformpassword: conformpassword,
+      token: token,
+    };
+    // const token=token
+    return this.http.patch(
+      `http://localhost:8000/resetpassword/${resetdata.token}`,
+      resetdata
+    );
   }
 }

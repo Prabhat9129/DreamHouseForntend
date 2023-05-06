@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
   logindata: any = { email: null, password: null };
   isError = false;
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -42,14 +43,18 @@ export class LoginComponent implements OnInit {
         if (resdata.utoken !== null) {
           localStorage.setItem('token', `Bearer ${resdata.utoken}`);
           this.toaster.success(resdata.message, resdata.status);
+          // setTimeout(() => {
           this.spinner.hide();
+          // }, 5000);
           this.router.navigate(['/home']);
         }
       },
       (err) => {
         console.log(err);
         this.toaster.error(err.error.message, err.error.status);
+        // setTimeout(() => {
         this.spinner.hide();
+        // }, 1000);
       }
     );
   }

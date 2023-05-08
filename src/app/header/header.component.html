@@ -40,10 +40,17 @@
             </li>
             <li><a style="cursor: pointer">Contact</a></li>
             <li class="d-none d-xl-none d-block d-lg-block">
-              <a style="cursor: pointer" routerLink="/login">Login</a>
+              <a style="cursor: pointer" routerLink="/login" *ngIf="!logout"
+                >Login</a
+              >
+              <a style="cursor: pointer" *ngIf="logout" (click)="onLogout()"
+                >Logout</a
+              >
             </li>
             <li class="d-none d-xl-none d-block d-lg-block">
-              <a style="cursor: pointer" routerLink="/signup">Register</a>
+              <a style="cursor: pointer" routerLink="/signup" *ngIf="!logout"
+                >Register</a
+              >
             </li>
           </ul>
         </nav>
@@ -74,7 +81,11 @@
               Change Password</a
             >
           </li>
-          <li><a href="#">Log Out</a></li>
+          <li>
+            <a style="cursor: pointer" (click)="onLogout()" *ngIf="logout"
+              >Log Out</a
+            >
+          </li>
         </ul>
       </div>
       <!-- Right Side Content / End -->
@@ -83,7 +94,12 @@
         <!-- Header Widget -->
         <div class="header-widget sign-in">
           <div class="show-reg-form modal-open">
-            <a style="cursor: pointer" routerLink="/login">Sign In</a>
+            <a style="cursor: pointer" routerLink="/login" *ngIf="!logout"
+              >Sign In</a
+            >
+            <a style="cursor: pointer" (click)="onLogout()" *ngIf="logout"
+              >Sign out</a
+            >
           </div>
         </div>
         <!-- Header Widget / End -->

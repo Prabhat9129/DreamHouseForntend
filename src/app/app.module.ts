@@ -18,6 +18,7 @@ import { UpdatepasswordComponent } from './auth/updatepassword/updatepassword.co
 import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './auth/resetpassword/resetpassword.component';
 import { UpdateprofileComponent } from './service/updateprofile/updateprofile.component';
+import { FooterComponent } from './footer/footer.component';
 // import { AdminModuleModule } from './admin-module/admin-module.module';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { UpdateprofileComponent } from './service/updateprofile/updateprofile.co
     ForgotpasswordComponent,
     ResetpasswordComponent,
     UpdateprofileComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

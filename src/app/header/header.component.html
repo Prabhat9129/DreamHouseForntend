@@ -43,7 +43,7 @@
               <a style="cursor: pointer" routerLink="/login" *ngIf="!logout"
                 >Login</a
               >
-              <a style="cursor: pointer" *ngIf="logout" (click)="onLogout()"
+              <a style="cursor: pointer" (click)="onLogout()" *ngIf="logout"
                 >Logout</a
               >
             </li>

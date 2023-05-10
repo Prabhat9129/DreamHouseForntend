@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { post, log, updatepassword } from './post.model';
+import { post, log, updatepassword, updateProfile } from './post.model';
 import { Subject } from 'rxjs';
 
 export interface AuthResponseData {
@@ -39,8 +39,6 @@ export class AuthServiceService {
     return this.http.post<any>('http://localhost:8000/signin', logdata);
   }
 
-  //Retrieve the token from local storage
-
   updatepassword({ currentpassword, newpassword, conformpassword }: any) {
     const updatepass: updatepassword = {
       currentpassword: currentpassword,
@@ -71,10 +69,43 @@ export class AuthServiceService {
       conformpassword: conformpassword,
       token: token,
     };
-    // const token=token
+
     return this.http.patch(
       `http://localhost:8000/resetpassword/${resetdata.token}`,
       resetdata
     );
+  }
+
+  updateprofile(file: File, user: any) {
+    const formData = new FormData();
+    formData.append('profileImg', file);
+    formData.append('name', user.name);
+    formData.append('email', user.email);
+    formData.append('password', user.password);
+    formData.append('role', user.role);
+    formData.append('number', user.number);
+    formData.append('address', user.address);
+    formData.append('city_id', user.city_id);
+    formData.append('gender', user.gender);
+    formData.append('pincode', user.pincode);
+
+    let token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `${token}`,
+    });
+
+    return this.http.patch(`http://localhost:8000/updateProfile`, formData, {
+      headers,
+    });
+  }
+
+  getstatecity() {
+    let token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `${token}`,
+    });
+    return this.http.get('http://localhost:8000/countrystate', {
+      headers,
+    });
   }
 }

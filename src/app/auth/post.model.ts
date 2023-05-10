@@ -14,3 +14,15 @@ export interface updatepassword {
   newpassword: string;
   conformpassword: string;
 }
+
+export interface updateProfile {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  number: number;
+  gender: string;
+  city_id: string;
+  pincode: number;
+  address: string;
+}

@@ -7,7 +7,7 @@
         <div class="card text-black" style="border-radius: 25px">
           <div class="card-body p-md-5">
             <div class="row justify-content-center">
-              <form method="POST" enctype="multipart/form-data">
+              <form [formGroup]="updateuser" (ngSubmit)="updateUser()">
                 <div class="container">
                   <div class="row gutters">
                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
@@ -27,8 +27,10 @@
                               <div class="form-outline flex-fill mb-0 my-1">
                                 <input
                                   type="file"
-                                  name="userprofile"
+                                  name="profileImg"
                                   class="form-control w-50"
+                                  formControlName="profileImg"
+                                  (change)="onChange($event)"
                                 />
                               </div>
                             </div>
@@ -59,6 +61,7 @@
                                   id="fullName"
                                   placeholder="Enter full name"
                                   value=""
+                                  formControlName="name"
                                 />
                               </div>
                             </div>
@@ -74,6 +77,7 @@
                                   id="eMail"
                                   placeholder="Enter email ID"
                                   value=""
+                                  formControlName="email"
                                 />
                               </div>
                             </div>
@@ -81,13 +85,14 @@
                               class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
                             >
                               <div class="form-group">
-                                <label>Contact_no :-</label>
+                                <label>Contact No :-</label>
                                 <input
-                                  type="text"
-                                  name="contact"
+                                  type="number"
+                                  name="number"
                                   class="form-control"
                                   id="zIp"
                                   value=""
+                                  formControlName="number"
                                 />
                               </div>
                             </div>
@@ -96,7 +101,11 @@
                             >
                               <div class="form-group">
                                 <label for="gender"> Gender :- </label>
-                                <select name="status" class="form-control">
+                                <select
+                                  name="gender"
+                                  class="form-control"
+                                  formControlName="gender"
+                                >
                                   status
                                   <option value="">SELECT STATUS</option>
                                   <option value="MALE">MALE</option>
@@ -112,7 +121,11 @@
                             >
                               <div class="form-group">
                                 <label for="city">City :-</label>
-                                <select name="City" class="form-control">
+                                <select
+                                  name="city_id"
+                                  class="form-control"
+                                  formControlName="city_id"
+                                >
                                   <option value="">SELECT CITY</option>
 
                                   <option value="1">surat</option>
@@ -126,15 +139,33 @@
                               <div class="form-group">
                                 <label>Pincode :-</label>
                                 <input
-                                  type="text"
+                                  type="number"
+                                  name="pincode"
                                   class="form-control"
                                   id="zIp"
                                   value=""
                                   placeholder="Zip Code"
+                                  formControlName="pincode"
                                 />
                               </div>
                             </div>
                           </div>
+
+                          <div
+                            class="col-xl-6 col-lg-6 col-md-6 col- sm-6 col-12"
+                          >
+                            <div class="form-group">
+                              <label>Address:-</label>
+                              <textarea
+                                name="address"
+                                id="add"
+                                cols="70"
+                                rows="1"
+                                formControlName="address"
+                              ></textarea>
+                            </div>
+                          </div>
+
                           <div class="row gutters">
                             <div
                               class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
@@ -142,13 +173,15 @@
                               <div
                                 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
                               >
-                                <input
+                                <button
                                   type="submit"
                                   id="submit"
                                   name="update"
-                                  value="Update"
                                   class="btn-secondary btn-lg btn-block"
-                                />
+                                  [disabled]="updateuser.invalid"
+                                >
+                                  Update
+                                </button>
                               </div>
                             </div>
                           </div>
@@ -165,3 +198,142 @@
     </div>
   </div>
 </section>
+
+<!-- spinner -->
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="rgb(50, 105, 138)" type="square-jelly-box"
+  [fullScreen]="true">
+  <h3 style="color: rgb(255, 255, 255);"> Please wait it's Loading... </h3>
+</ngx-spinner>
+
+<section class="signup-area ptb-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="signup-form">
+          <div class="section-tittle text-center">
+            <h2 style="color: #5170ec;"><u>Update Your Profile</u></h2>
+          </div>
+          <form [formGroup]="updateuser" (ngSubmit)="updateUser()">
+            <div class="row">
+              <div class="row mb-2">
+                <div class="col-md-12 col-sm-12">
+                  <div class="mb-3 text-center">
+                    <img [src]="counter > 0 && imageUrl ?  imageUrl : updateuser.controls['ProfilePicture'].value"
+                      alt="Profile Picture">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Firstname">First Name</label>
+                    <input class="form-control" type="text" name="Firstname" id="Firstname" placeholder="Firstname"
+                      formControlName="FirstName">
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Middlename">Middle Name</label>
+                    <input class="form-control" type="text" name="Middlename" id="Middlename" placeholder="MiddleName"
+                      formControlName="MiddleName">
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Lastname">Last Name</label>
+                    <input class="form-control" type="text" name="Lastname" id="Lastname" placeholder="Lastname"
+                      formControlName="LastName">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Gender">Gender</label>
+                    <select class="form-control" formControlName="Gender">
+                      <option disabled value="">Select Gender</option>
+                      <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="PhoneNumber">Phone Number</label>
+                    <input type="number" class="form-control" id="PhoneNumber" placeholder="9998882020"
+                      formControlName="PhoneNumber">
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="DOB">Date of birth</label>
+                    <input class="form-control" type="date" id="DOB" name="date" formControlName="DOB">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="State">State</label>
+                    <select class="form-control" formControlName="State">
+                      <option disabled value="">Select State</option>
+                      <option *ngFor="let state of states" [value]="state">{{state}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="City">City</label>
+                    <select class="form-control" formControlName="City">
+                      <option disabled value="">Select City</option>
+                      <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Pincode">Pincode</label>
+                    <input class="form-control" type="text" name="name" id="Pincode" placeholder="Pincode"
+                      formControlName="Pincode">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="FullAddress">Full Address</label>
+                    <textarea class="form-control" id="FullAddress" rows="3" placeholder="Enter your address"
+                      formControlName="FullAddress"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div class="mb-3">
+                    <label for="ProfilePic">Profile Picture</label>
+                    <input class="form-control" type="file" id="ProfilePic" (change)="onChange($event)">
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" formControlName="Email">
+              <div class="col-12 text-center">
+                <button class="box-btn signup-btn" href="#" [disabled]="updateuser.invalid">
+                  Sign Up
+                </button>
+              </div>
+              <div class="col-12 text-center">
+                <p class="al-acc">
+                  Already have an account?
+                  <a routerLink="/signin"> Sign In</a>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <input type="file" (change)="onFileSelected($event)" accept="image/*">
+
+<img [src]="imageUrl" *ngIf="imageUrl"> -->

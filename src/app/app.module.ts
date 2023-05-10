@@ -19,7 +19,7 @@ import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.co
 import { ResetpasswordComponent } from './auth/resetpassword/resetpassword.component';
 import { UpdateprofileComponent } from './service/updateprofile/updateprofile.component';
 import { FooterComponent } from './footer/footer.component';
-// import { AdminModuleModule } from './admin-module/admin-module.module';
+import { AdminModuleModule } from './admin-module/admin-module.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import { FooterComponent } from './footer/footer.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    // AdminModuleModule,
+    AdminModuleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [AuthServiceService],

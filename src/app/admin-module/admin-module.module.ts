@@ -8,22 +8,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 // Import routing module
 import { AppRoutingModule } from '../admin-module/app-routing.module';
 
-// Import app component
-import { AppComponent } from '../admin-module/app.component';
-
-// Import containers
-import {
-  DefaultFooterComponent,
-  DefaultHeaderComponent,
-  DefaultLayoutComponent,
-} from './containers';
 import {
   PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface,
   PerfectScrollbarModule,
 } from 'ngx-perfect-scrollbar';
 
-import { IconModule, IconSetService } from '@coreui/icons-angular';
 import {
   AvatarModule,
   BadgeModule,
@@ -45,17 +35,15 @@ import {
   UtilitiesModule,
 } from '@coreui/angular';
 import { Title } from '@angular/platform-browser';
+import { AdminHeaderComponent } from './default/admin-header/admin-header.component';
+import { DefaultComponent } from './default/default.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
-const APP_CONTAINERS = [
-  DefaultFooterComponent,
-  DefaultHeaderComponent,
-  DefaultLayoutComponent,
-];
+
 @NgModule({
-  declarations: [AppComponent, DefaultLayoutComponent, ...APP_CONTAINERS],
+  declarations: [AdminHeaderComponent, DefaultComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -90,9 +78,9 @@ const APP_CONTAINERS = [
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
-    IconSetService,
+
     Title,
   ],
-  exports: [AppComponent],
+  exports: [DefaultComponent],
 })
 export class AdminModuleModule {}

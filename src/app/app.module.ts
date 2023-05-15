@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -20,6 +20,11 @@ import { ResetpasswordComponent } from './auth/resetpassword/resetpassword.compo
 import { UpdateprofileComponent } from './service/updateprofile/updateprofile.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminModuleModule } from './admin-module/admin-module.module';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AuthGuard } from './auth/auth-guard';
+import { LoginModelComponent } from './auth/login-model/login-model.component';
+import { CanDeactivateGaurd } from './service/updateprofile/can-deactivate-gaurd.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,8 @@ import { AdminModuleModule } from './admin-module/admin-module.module';
     ResetpasswordComponent,
     UpdateprofileComponent,
     FooterComponent,
+    NotFoundComponent,
+    LoginModelComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +59,7 @@ import { AdminModuleModule } from './admin-module/admin-module.module';
     AdminModuleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [AuthServiceService],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorService,multi:true},AuthServiceService,AuthGuard,CanDeactivateGaurd],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

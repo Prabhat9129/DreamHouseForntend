@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { post, log, updatepassword, updateProfile } from './post.model';
+import { environment } from 'src/environments/environment';
+
 import { Subject } from 'rxjs';
 
 export interface AuthResponseData {
@@ -15,6 +17,8 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthServiceService {
+private  apiurl=environment.API_URL
+
   user = new Subject<any>();
   error = new Subject<any>();
   data = this.user.asObservable();
@@ -28,7 +32,7 @@ export class AuthServiceService {
       role: role,
     };
 
-    return this.http.post<any>('http://localhost:8000/signup', postdata);
+    return this.http.post<any>(`${this.apiurl}/signup`, postdata);
   }
 
   login({ email, password }: log) {
@@ -36,7 +40,7 @@ export class AuthServiceService {
       email: email,
       password: password,
     };
-    return this.http.post<any>('http://localhost:8000/signin', logdata);
+    return this.http.post<any>(`${this.apiurl}/signin`, logdata);
   }
 
   updatepassword({ currentpassword, newpassword, conformpassword }: any) {
@@ -45,22 +49,14 @@ export class AuthServiceService {
       newpassword: newpassword,
       conformpassword: conformpassword,
     };
-    let token = localStorage.getItem('token');
-    console.log(token);
-    const headers = new HttpHeaders({
-      Authorization: `${token}`,
-    });
 
-    return this.http.patch('http://localhost:8000/PasswordUpadte', updatepass, {
-      headers,
-    });
+    return this.http.patch(`${this.apiurl}/PasswordUpadte`, updatepass);
   }
 
   forgotpassword({ email }: any) {
-    console.log(email);
     const useremail: any = { email: email };
     console.log(useremail);
-    return this.http.post('http://localhost:8000/forgotpassword', useremail);
+    return this.http.post(`${this.apiurl}/forgotpassword`, useremail);
   }
 
   resetpassword({ newpassword, conformpassword, token }: any) {
@@ -71,7 +67,7 @@ export class AuthServiceService {
     };
 
     return this.http.patch(
-      `http://localhost:8000/resetpassword/${resetdata.token}`,
+      `${this.apiurl}/${resetdata.token}`,
       resetdata
     );
   }
@@ -89,23 +85,32 @@ export class AuthServiceService {
     formData.append('gender', user.gender);
     formData.append('pincode', user.pincode);
 
-    let token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `${token}`,
-    });
-
-    return this.http.patch(`http://localhost:8000/updateProfile`, formData, {
-      headers,
-    });
+    return this.http.patch(`${this.apiurl}/updateProfile`, formData);
   }
 
   getstatecity() {
-    let token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `${token}`,
-    });
-    return this.http.get('http://localhost:8000/countrystate', {
-      headers,
-    });
+    return this.http.get(`${this.apiurl}/countrystate`, );
+  }
+
+  isLoggedIn():boolean{
+const token =localStorage.getItem('token')
+if(token){
+  return true
+}
+else{
+  return false
+}
+  }
+
+
+  getUser(){
+    this.http.get(`${this.apiurl}/getuser`).subscribe(
+      (responsedata)=>{
+        console.log(responsedata)
+      },
+      (err)=>{
+        console.log(err)
+      }
+    )
   }
 }

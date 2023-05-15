@@ -48,3 +48,13 @@
   background: white;
   color: #bcd0f7;
 }
+.textarea{
+  background: white;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  /* border: 1px; */
+  margin-bottom: 1rem;
+  font-size: 0.825rem;
+  color: #bcd0f7
+}

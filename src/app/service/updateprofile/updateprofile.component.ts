@@ -5,16 +5,18 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
+import { CanComponentDeactivate } from './can-deactivate-gaurd.service';
 
 @Component({
   selector: 'app-updateprofile',
   templateUrl: './updateprofile.component.html',
   styleUrls: ['./updateprofile.component.css'],
 })
-export class UpdateprofileComponent implements OnInit {
+export class UpdateprofileComponent implements OnInit ,CanComponentDeactivate{
   ProfilePicture: File;
   imageUrl: any;
   counter = 0;
+  changeSaved=false;
 
   constructor(
     private router: Router,
@@ -106,5 +108,9 @@ export class UpdateprofileComponent implements OnInit {
         this.imageUrl = reader.result;
       };
     }
+  }
+
+  canDeactivate():Observable<boolean>|Promise<boolean>|boolean{
+return false;
   }
 }

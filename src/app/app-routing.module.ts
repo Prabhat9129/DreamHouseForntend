@@ -8,20 +8,24 @@ import { UpdatepasswordComponent } from './auth/updatepassword/updatepassword.co
 import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './auth/resetpassword/resetpassword.component';
 import { UpdateprofileComponent } from './service/updateprofile/updateprofile.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AuthGuard } from './auth/auth-guard';
+import { LoginModelComponent } from './auth/login-model/login-model.component';
+import { CanDeactivateGaurd } from './service/updateprofile/can-deactivate-gaurd.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  { path: 'updateprofile', component: UpdateprofileComponent },
-  { path: 'forgotpassword', component: ForgotpasswordComponent },
-  { path: 'resetpassword/:token', component: ResetpasswordComponent },
-  { path: 'signup', component: RegisterComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'property', component: PropertyComponent },
-  { path: 'PasswordUpadte', component: UpdatepasswordComponent },
+  { path: '',title:'DreamHouse', component: HomeComponent },
+  { path: 'signup',title:'Signup', component: RegisterComponent },
+  { path: 'login',title:'Login', component: LoginComponent},
+  { path: 'forgotpassword',title:'ForgotPassword', component: ForgotpasswordComponent },
+  { path: 'resetpassword/:token',title:'ResetPassword', component: ResetpasswordComponent },
+  { path: 'home',title:'Home', component: HomeComponent },
+  {path:'login-model',title:'LoginModel',component:LoginModelComponent},
+  { path: 'PasswordUpadte',title:'UpdatePassword',canActivate:[AuthGuard], component: UpdatepasswordComponent },
+  { path: 'updateprofile',title:'UpdateProfile',canActivate:[AuthGuard], component: UpdateprofileComponent,canDeactivate:[CanDeactivateGaurd] },
+  { path: 'property',title:'Properties', component: PropertyComponent },
+  { path:'not-found',title: 'NotFound', component:NotFoundComponent},
+	{ path:'**', redirectTo:'/not-found',pathMatch:'full'}
 ];
 
 @NgModule({

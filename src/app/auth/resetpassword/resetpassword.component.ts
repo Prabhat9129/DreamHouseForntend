@@ -45,7 +45,7 @@ export class ResetpasswordComponent {
         if (resdata.utoken !== null) {
           this.toaster.success(resdata.message, resdata.status);
           this.spinner.hide();
-          this.router.navigate(['/home']);
+          // this.router.navigate(['/home']);
         }
       },
       (err) => {

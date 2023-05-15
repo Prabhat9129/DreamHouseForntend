@@ -1,3 +1,10 @@
+export interface response {
+  status: string;
+  statuscode: number;
+  message: string;
+  user: {};
+}
+
 export interface post {
   name: string;
   email: string;

@@ -16,13 +16,10 @@
                           <div class="account-settings">
                             <div class="user-profile">
                               <div class="user-avatar">
-                                <img
-                                  src="../../../assets/Clientassets/images/team/a-1.png"
-                                  alt="Maxwell Admin"
-                                />
+                                <img [src]="this.url" alt="Maxwell Admin" />
                               </div>
-                              <h5 class="user-name">prabhat</h5>
-                              <h6 class="user-email">prabhat@gmail.com</h6>
+                              <h5 class="user-name">{{ this.name }}</h5>
+                              <h6 class="user-email">{{ this.email }}</h6>
 
                               <div class="form-outline flex-fill mb-0 my-1">
                                 <input
@@ -53,39 +50,23 @@
                               class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
                             >
                               <div class="form-group">
-                                <label for="Name">Name :-</label>
+                                <label for="Name">Name</label>
                                 <input
                                   type="text"
                                   name="name"
                                   class="form-control"
                                   id="fullName"
-                                  placeholder="Enter full name"
                                   value=""
                                   formControlName="name"
                                 />
                               </div>
                             </div>
+
                             <div
                               class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
                             >
                               <div class="form-group">
-                                <label for="eMail">Email :-</label>
-                                <input
-                                  type="email"
-                                  name="email"
-                                  class="form-control"
-                                  id="eMail"
-                                  placeholder="Enter email ID"
-                                  value=""
-                                  formControlName="email"
-                                />
-                              </div>
-                            </div>
-                            <div
-                              class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
-                            >
-                              <div class="form-group">
-                                <label>Contact No :-</label>
+                                <label>Contact No</label>
                                 <input
                                   type="number"
                                   name="number"
@@ -100,17 +81,33 @@
                               class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
                             >
                               <div class="form-group">
-                                <label for="gender"> Gender :- </label>
+                                <label for="gender"> Gender</label>
                                 <select
                                   name="gender"
                                   class="form-control"
                                   formControlName="gender"
                                 >
                                   status
-                                  <option value="">SELECT STATUS</option>
-                                  <option value="MALE">MALE</option>
-                                  <option value="FEMALE">FEMALE</option>
-                                  <option value="OTHER">OTHER</option>
+                                  <option value="">Select Status</option>
+                                  <option value="MALE">Male</option>
+                                  <option value="FEMALE">Female</option>
+                                  <option value="OTHER">Other</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div
+                              class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
+                            >
+                              <div class="form-group">
+                                <label for="state">State</label>
+                                <select
+                                  id="state"
+                                  name="state"
+                                  class="form-control"
+                                >
+                                  <option value="">Select State</option>
+
+                                  <option value="1">Gujarat</option>
                                 </select>
                               </div>
                             </div>
@@ -120,14 +117,13 @@
                               class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
                             >
                               <div class="form-group">
-                                <label for="city">City :-</label>
+                                <label for="city">City</label>
                                 <select
                                   name="city_id"
                                   class="form-control"
                                   formControlName="city_id"
                                 >
-                                  <option value="">SELECT CITY</option>
-
+                                  <option value="">Select City</option>
                                   <option value="1">surat</option>
                                 </select>
                               </div>
@@ -137,7 +133,7 @@
                               class="col-xl-6 col-lg-6 col-md-6 col- sm-6 col-12"
                             >
                               <div class="form-group">
-                                <label>Pincode :-</label>
+                                <label>Pincode</label>
                                 <input
                                   type="number"
                                   name="pincode"
@@ -149,20 +145,19 @@
                                 />
                               </div>
                             </div>
-                          </div>
-
-                          <div
-                            class="col-xl-6 col-lg-6 col-md-6 col- sm-6 col-12"
-                          >
-                            <div class="form-group">
-                              <label>Address:-</label>
-                              <textarea
-                                name="address"
-                                id="add"
-                                cols="70"
-                                rows="1"
-                                formControlName="address"
-                              ></textarea>
+                            <div
+                              class="col-xl-6 col-lg-6 col-md-6 col- sm-6 col-12"
+                            >
+                              <div class="form-group">
+                                <label>Address</label>
+                                <textarea
+                                  name="address"
+                                  id="add"
+                                  cols="76"
+                                  rows="1"
+                                  formControlName="address"
+                                ></textarea>
+                              </div>
                             </div>
                           </div>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -10,7 +11,11 @@ export class HeaderComponent implements OnInit {
   logout: boolean = false;
   token: any = '';
 
-  constructor(private toaster: ToastrService) {}
+  constructor(
+    private toaster: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
     if (this.token) {
@@ -24,6 +29,7 @@ export class HeaderComponent implements OnInit {
       localStorage.removeItem('token');
       this.toaster.success('success', 'user Logout successfully');
       this.logout = false;
+      this.router.navigate(['home']);
     } else {
       this.toaster.info('success', 'user alredy logout successfully');
     }

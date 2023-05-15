@@ -14,22 +14,41 @@ import { LoginModelComponent } from './auth/login-model/login-model.component';
 import { CanDeactivateGaurd } from './service/updateprofile/can-deactivate-gaurd.service';
 
 const routes: Routes = [
-  { path: '',title:'DreamHouse', component: HomeComponent },
-  { path: 'signup',title:'Signup', component: RegisterComponent },
-  { path: 'login',title:'Login', component: LoginComponent},
-  { path: 'forgotpassword',title:'ForgotPassword', component: ForgotpasswordComponent },
-  { path: 'resetpassword/:token',title:'ResetPassword', component: ResetpasswordComponent },
-  { path: 'home',title:'Home', component: HomeComponent },
-  {path:'login-model',title:'LoginModel',component:LoginModelComponent},
-  { path: 'PasswordUpadte',title:'UpdatePassword',canActivate:[AuthGuard], component: UpdatepasswordComponent },
-  { path: 'updateprofile',title:'UpdateProfile',canActivate:[AuthGuard], component: UpdateprofileComponent,canDeactivate:[CanDeactivateGaurd] },
-  { path: 'property',title:'Properties', component: PropertyComponent },
-  { path:'not-found',title: 'NotFound', component:NotFoundComponent},
-	{ path:'**', redirectTo:'/not-found',pathMatch:'full'}
+  { path: '', title: 'DreamHouse', component: HomeComponent },
+  { path: 'signup', title: 'Signup', component: RegisterComponent },
+  { path: 'login', title: 'Login', component: LoginComponent },
+  {
+    path: 'forgotpassword',
+    title: 'ForgotPassword',
+    component: ForgotpasswordComponent,
+  },
+  {
+    path: 'resetpassword/:token',
+    title: 'ResetPassword',
+    component: ResetpasswordComponent,
+  },
+  { path: 'home', title: 'Home', component: HomeComponent },
+  { path: 'login-model', title: 'LoginModel', component: LoginModelComponent },
+  {
+    path: 'PasswordUpadte',
+    title: 'UpdatePassword',
+    canActivate: [AuthGuard],
+    component: UpdatepasswordComponent,
+  },
+  {
+    path: 'updateprofile',
+    title: 'UpdateProfile',
+    canActivate: [AuthGuard],
+    component: UpdateprofileComponent,
+  },
+  // ,canDeactivate:[CanDeactivateGaurd]
+  { path: 'property', title: 'Properties', component: PropertyComponent },
+  { path: 'not-found', title: 'NotFound', component: NotFoundComponent },
+  { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

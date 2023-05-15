@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { post, log, updatepassword, updateProfile } from './post.model';
 import { environment } from 'src/environments/environment';
 
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 export interface AuthResponseData {
   status: string;
@@ -17,11 +17,11 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthServiceService {
-private  apiurl=environment.API_URL
+  private apiurl = environment.API_URL;
 
-  user = new Subject<any>();
+  private user = new Subject<any>();
   error = new Subject<any>();
-  data = this.user.asObservable();
+  data: Observable<any>;
   constructor(private http: HttpClient) {}
 
   register({ name, email, password, role }: post) {
@@ -67,7 +67,7 @@ private  apiurl=environment.API_URL
     };
 
     return this.http.patch(
-      `${this.apiurl}/${resetdata.token}`,
+      `${this.apiurl}resetpassword/${resetdata.token}`,
       resetdata
     );
   }
@@ -89,28 +89,19 @@ private  apiurl=environment.API_URL
   }
 
   getstatecity() {
-    return this.http.get(`${this.apiurl}/countrystate`, );
+    return this.http.get(`${this.apiurl}/countrystate`);
   }
 
-  isLoggedIn():boolean{
-const token =localStorage.getItem('token')
-if(token){
-  return true
-}
-else{
-  return false
-}
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-
-  getUser(){
-    this.http.get(`${this.apiurl}/getuser`).subscribe(
-      (responsedata)=>{
-        console.log(responsedata)
-      },
-      (err)=>{
-        console.log(err)
-      }
-    )
+  getUser() {
+    return this.http.get(`${this.apiurl}/getuser`);
   }
 }

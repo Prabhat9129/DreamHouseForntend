@@ -27,18 +27,13 @@
               <a style="cursor: pointer" routerLink="home">Home</a>
             </li>
             <li>
-              <a>Listing</a>
-            </li>
-            <li>
               <a style="cursor: pointer" routerLink="property">Property</a>
             </li>
+
+            <li><a style="cursor: pointer" routerLink="contact">Contact</a></li>
             <li>
-              <a>Pages</a>
+              <a style="cursor: pointer" routerLink="about">About us</a>
             </li>
-            <li>
-              <a>Blog</a>
-            </li>
-            <li><a style="cursor: pointer">Contact</a></li>
             <li class="d-none d-xl-none d-block d-lg-block">
               <a style="cursor: pointer" routerLink="/login" *ngIf="!logout"
                 >Login</a
@@ -61,11 +56,7 @@
       <!-- Right Side Content / End -->
       <div class="header-user-menu user-menu add">
         <div class="header-user-name">
-          <span
-            ><img
-              src="../assets/Clientassets/images/testimonials/ts-2.jpg"
-              alt="" /></span
-          >Hi, Prabhat!
+          <span><img src="{{ this.url }}" alt="" /></span>hii{{ this.name }}!
         </div>
 
         <ul id="responsive">
@@ -74,7 +65,11 @@
               Edit profile</a
             >
           </li>
-          <li><a> Add Property</a></li>
+          <li>
+            <a style="cursor: pointer" routerLink="/addproperty">
+              Add Property</a
+            >
+          </li>
           <li><a> Payments</a></li>
           <li>
             <a style="cursor: pointer" routerLink="/PasswordUpadte">

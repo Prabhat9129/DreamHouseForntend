@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { post, log, updatepassword, updateProfile } from './post.model';
 import { environment } from 'src/environments/environment';
 
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 
 export interface AuthResponseData {
   status: string;
@@ -20,6 +20,7 @@ export class AuthServiceService {
   private apiurl = environment.API_URL;
 
   private user = new Subject<any>();
+  isLoggedin = new BehaviorSubject<any>(this.getUser());
   error = new Subject<any>();
   data: Observable<any>;
   constructor(private http: HttpClient) {}
@@ -67,7 +68,7 @@ export class AuthServiceService {
     };
 
     return this.http.patch(
-      `${this.apiurl}resetpassword/${resetdata.token}`,
+      `${this.apiurl}/resetpassword/${resetdata.token}`,
       resetdata
     );
   }
@@ -102,6 +103,10 @@ export class AuthServiceService {
   }
 
   getUser() {
-    return this.http.get(`${this.apiurl}/getuser`);
+    return this.http.get(`${this.apiurl}/getuser`).pipe(
+      map((res: any) => {
+        return res.userdata;
+      })
+    );
   }
 }

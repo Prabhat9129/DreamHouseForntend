@@ -129,14 +129,6 @@
     <script src="./assets/Clientassets/js/forms-2.js"></script>
     <script src="./assets/Clientassets/js/range.js"></script>
     <script src="./assets/Clientassets/js/color-switcher.js"></script>
-    <script>
-      $(window).on("scroll load", function () {
-        $("#header.cloned #logo img").attr(
-          "src",
-          $("#header #logo img").attr("data-sticky-logo")
-        );
-      });
-    </script>
 
     <!-- Slider Revolution scripts -->
     <script src="./assets/Clientassets/revolution/js/jquery.themepunch.tools.min.js"></script>
@@ -150,70 +142,7 @@
     <script src="./assets/Clientassets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
     <script src="./assets/Clientassets/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
     <script src="./assets/Clientassets/revolution/js/extensions/revolution.extension.video.min.js"></script>
-
-    <script>
-      $(".home5-right-slider").owlCarousel({
-        loop: true,
-        margin: 30,
-        dots: false,
-        nav: true,
-        rtl: false,
-        autoplayHoverPause: false,
-        autoplay: false,
-        singleItem: true,
-        smartSpeed: 1200,
-        navText: [
-          "<i class='fas fa-long-arrow-alt-left'></i>",
-          "<i class='fas fa-long-arrow-alt-right'></i>",
-        ],
-        responsive: {
-          0: {
-            items: 1,
-            center: false,
-          },
-          480: {
-            items: 1,
-            center: false,
-          },
-          520: {
-            items: 2,
-            center: false,
-          },
-          600: {
-            items: 2,
-            center: false,
-          },
-          768: {
-            items: 2,
-          },
-          992: {
-            items: 3,
-          },
-          1200: {
-            items: 5,
-          },
-          1366: {
-            items: 5,
-          },
-          1400: {
-            items: 5,
-          },
-        },
-      });
-    </script>
-
-    <script>
-      $(".dropdown-filter").on("click", function () {
-        $(".explore__form-checkbox-list").toggleClass("filter-block");
-      });
-    </script>
-
-    <!-- MAIN JS -->
-    <script src="./assets/Clientassets/js/script.js"></script>
-      <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+  </head>
   <body class="homepage-5 the-search hd-white mat-typography">
     <app-root></app-root>
   </body>

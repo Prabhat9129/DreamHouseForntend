@@ -1,0 +1,212 @@
+<p>contact works!</p>
+
+<!-- <section class="headings">
+  <div class="text-heading text-center">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <h2><a href="index.html">Home </a> &nbsp;/&nbsp; Contact Us</h2>
+    </div>
+  </div>
+</section> -->
+<!-- END SECTION HEADINGS -->
+
+<!-- START SECTION CONTACT US -->
+<!-- <section class="contact-us">
+  <div class="container">
+    <form class="contact-form" name="contactform" method="post">
+      <div class="form-group">
+        <input
+          type="text"
+          required
+          class="form-control input-custom input-full"
+          name="name"
+          placeholder="First Name"
+          value=""
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          required
+          class="form-control input-custom input-full"
+          name="lastname"
+          placeholder="Last Name"
+          value=""
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="number"
+          required
+          class="form-control input-custom input-full"
+          name="contactn"
+          placeholder="Contact Number"
+          value=""
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control input-custom input-full"
+          name="email"
+          placeholder="Email"
+          value=""
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          name="refernces"
+          class="form-control input-custom input-full"
+          placeholder="Where you got refernces of this?"
+          value=""
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          name="message"
+          class="form-control input-custom input-full"
+          placeholder="message"
+          value=""
+        />
+      </div>
+      <input
+        type="submit"
+        name="contact"
+        class="btn btn-primary btn-lg"
+        value="submit request"
+      />
+    </form>
+  </div>
+</section> -->
+<!-- <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <div id="preloader">
+    <div id="status">
+      <div class="status-mes"></div>
+    </div>
+  </div>
+</ngx-spinner> -->
+<div class="bg-image">
+  <section class="vh-100">
+    <div class="container py-5 h-200">
+      <div class="row d-flex align-items-center justify-content-center h-200">
+        <div class="col-md-8 col-lg-7 col-xl-5">
+          <img
+            src="../../../assets/Clientassets/images/popular-places/18.png"
+            class="img-fluid"
+            alt="Sample image"
+          />
+        </div>
+        <div class="login">
+          <form>
+            <!-- (ngSubmit)="onSubmit(f)" #f="ngForm" -->
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form1Example13">Full Name</label>
+              <input
+                id="form1Example13"
+                class="form-control form-control-lg"
+                name="name"
+                type="text"
+                ngModel
+                email
+                required
+                #email="ngModel"
+              />
+              <!-- <span *ngIf="!email.valid && email.touched"
+                >Email Is Requried</span
+              > -->
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form1Example13"
+                >Email address</label
+              >
+              <input
+                id="form1Example13"
+                class="form-control form-control-lg"
+                name="email"
+                type="email"
+                ngModel
+                email
+                required
+                #email="ngModel"
+              />
+              <span *ngIf="!email.valid && email.touched"
+                >Email Is Requried</span
+              >
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form1Example23">Number</label>
+              <input
+                type="number"
+                id="form1Example23"
+                class="form-control form-control-lg"
+                name="number"
+                id="password1"
+                ngModel
+                required
+                minlength="8"
+                #password="ngModel"
+              />
+
+              <!-- <span *ngIf="!password.valid && password.touched"
+                >Password is Required</span
+                 placeholder="Where you got refernces of this?"
+              > -->
+            </div>
+
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form1Example23">Reference</label>
+              <input
+                type="text"
+                id="form1Example23"
+                placeholder="Where you got refernces?"
+                class="form-control form-control-lg"
+                name="reference"
+                id="password1"
+                ngModel
+                required
+                #password="ngModel"
+              />
+
+              <!-- <span *ngIf="!password.valid && password.touched"
+                  >Password is Required</span
+                   placeholder="Where you got refernces of this?"
+                > -->
+            </div>
+
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form1Example24">Message</label>
+              <textarea
+                class="form-control form-control-lg"
+                name="message"
+                id="form1Example24"
+                cols="50"
+                rows="2"
+              >
+              </textarea>
+
+              <!-- <span *ngIf="!password.valid && password.touched"
+                    >Password is Required</span
+                     placeholder="Where you got refernces of this?"
+                  > -->
+            </div>
+            <!-- Submit button -->
+            <div id="pass-info" class="clearfix"></div>
+            <button type="submit" class="btn-primary btn-lg btn-block">
+              contact us
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

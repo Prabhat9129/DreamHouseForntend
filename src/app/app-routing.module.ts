@@ -12,6 +12,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './auth/auth-guard';
 import { LoginModelComponent } from './auth/login-model/login-model.component';
 import { CanDeactivateGaurd } from './service/updateprofile/can-deactivate-gaurd.service';
+import { AddpropertyComponent } from './service/addproperty/addproperty.component';
+import { ContactComponent } from './service/contact/contact.component';
+import { AboutusComponent } from './service/aboutus/aboutus.component';
 
 const routes: Routes = [
   { path: '', title: 'DreamHouse', component: HomeComponent },
@@ -40,6 +43,22 @@ const routes: Routes = [
     title: 'UpdateProfile',
     canActivate: [AuthGuard],
     component: UpdateprofileComponent,
+  },
+  {
+    path: 'addproperty',
+    title: 'AddProperty',
+    canActivate: [AuthGuard],
+    component: AddpropertyComponent,
+  },
+  {
+    path: 'contact',
+    title: 'Contact Page',
+    component: ContactComponent,
+  },
+  {
+    path: 'about',
+    title: 'Aboutus Page',
+    component: AboutusComponent,
   },
   // ,canDeactivate:[CanDeactivateGaurd]
   { path: 'property', title: 'Properties', component: PropertyComponent },

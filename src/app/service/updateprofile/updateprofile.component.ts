@@ -31,27 +31,20 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
     private spinner: NgxSpinnerService
   ) {}
   ngOnInit(): void {
-    const cloudinaryCore = new cloudinary.Cloudinary({
-      cloud_name: 'dz9zindot',
-      api_key: '974952477946219',
-      api_secret: 'tHnJv1OEwD0dJPuLLNuTWDsDERs',
-    });
-    // cloudinaryCore.fetch_image(`${this.url}`);
-
     this.service.getUser().subscribe(
       (res: any) => {
         if (res) {
           console.log(res.userdata);
-          this.name = res.userdata.name;
-          this.email = res.userdata.email;
-          this.url = res.userdata.profileImg;
+          this.name = res.name;
+          this.email = res.email;
+          this.url = res.profileImg;
           this.updateuser.setValue({
-            name: res.userdata.name,
-            number: res.userdata.number,
-            gender: res.userdata.gender,
-            address: res.userdata.address,
-            city_id: res.userdata.city_id,
-            pincode: res.userdata.pincode,
+            name: res.name,
+            number: res.number,
+            gender: res.gender,
+            address: res.address,
+            city_id: res.city_id,
+            pincode: res.pincode,
             profileImg: null,
           });
           console.log(this.updateuser);
@@ -61,19 +54,6 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
         console.log(err);
       }
     );
-
-    this.updateuser.patchValue({
-      name: this.name,
-    });
-
-    const imageUrl = cloudinaryCore.url(`${this.url}`, {
-      width: 500,
-      height: 500,
-      crop: 'fill',
-      secure: true,
-    });
-    console.log(imageUrl, this.url);
-    // this.url = imageUrl;
 
     this.service.getstatecity().subscribe(
       (resdata) => {

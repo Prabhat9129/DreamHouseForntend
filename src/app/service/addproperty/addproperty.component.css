@@ -1,0 +1,39 @@
+h3 {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 40px;
+  padding-bottom: 25px;
+  color: #274abb;
+  text-transform: capitalize;
+}
+h1 {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 40px;
+  padding-bottom: 25px;
+}
+label {
+  color: #333;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.form-group {
+  padding-top: 0px;
+  padding-right: 50px;
+  padding-bottom: 0px;
+  padding-left: 50px;
+}
+#top {
+  padding-top: 6rem;
+  padding-right: 0px;
+  padding-bottom: 6rem;
+  padding-left: 0px;
+}
+
+span {
+  color: rgb(161, 159, 159);
+}

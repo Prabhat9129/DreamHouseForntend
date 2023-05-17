@@ -29,6 +29,7 @@
     "bootstrap": "^5.2.3",
     "chart.js": "^3.1.1",
     "cloudinary-core": "^2.13.0",
+    "country-state-city": "^3.1.4",
     "jquery": "^3.6.4",
     "ngx-perfect-scrollbar": "^10.1.1",
     "ngx-spinner": "^15.0.1",

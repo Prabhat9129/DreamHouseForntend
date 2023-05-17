@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
+    console.log('hello');
     if (this.logout) {
       localStorage.removeItem('token');
       this.email = '';

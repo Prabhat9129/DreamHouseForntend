@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
 import { CanComponentDeactivate } from './can-deactivate-gaurd.service';
-import * as cloudinary from 'cloudinary-core';
 
 import { response } from 'src/app/auth/post.model';
 

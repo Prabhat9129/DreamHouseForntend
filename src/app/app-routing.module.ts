@@ -15,6 +15,8 @@ import { CanDeactivateGaurd } from './service/updateprofile/can-deactivate-gaurd
 import { AddpropertyComponent } from './service/addproperty/addproperty.component';
 import { ContactComponent } from './service/contact/contact.component';
 import { AboutusComponent } from './service/aboutus/aboutus.component';
+import { PropertiesFullListComponent } from './service/properties-full-list/properties-full-list.component';
+import { PropertiesDetailsComponent } from './service/properties-details/properties-details.component';
 
 const routes: Routes = [
   { path: '', title: 'DreamHouse', component: HomeComponent },
@@ -54,6 +56,16 @@ const routes: Routes = [
     path: 'contact',
     title: 'Contact Page',
     component: ContactComponent,
+  },
+  {
+    path: 'propertylist',
+    title: 'Property-Full-List',
+    component: PropertiesFullListComponent,
+  },
+  {
+    path: 'propertydetail',
+    title: 'Property-Details',
+    component: PropertiesDetailsComponent,
   },
   {
     path: 'about',

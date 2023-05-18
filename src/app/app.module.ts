@@ -2,6 +2,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import { Country, State, City } from 'country-state-city';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -28,6 +30,8 @@ import { CanDeactivateGaurd } from './service/updateprofile/can-deactivate-gaurd
 import { AddpropertyComponent } from './service/addproperty/addproperty.component';
 import { ContactComponent } from './service/contact/contact.component';
 import { AboutusComponent } from './service/aboutus/aboutus.component';
+import { PropertiesFullListComponent } from './service/properties-full-list/properties-full-list.component';
+import { PropertiesDetailsComponent } from './service/properties-details/properties-details.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,8 @@ import { AboutusComponent } from './service/aboutus/aboutus.component';
     AddpropertyComponent,
     ContactComponent,
     AboutusComponent,
+    PropertiesFullListComponent,
+    PropertiesDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +71,16 @@ import { AboutusComponent } from './service/aboutus/aboutus.component';
     AdminModuleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorService,multi:true},AuthServiceService,AuthGuard,CanDeactivateGaurd],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+    AuthServiceService,
+    AuthGuard,
+    CanDeactivateGaurd,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

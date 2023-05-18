@@ -10,308 +10,376 @@
     <div
       class="row d-flex justify-content-center align-items-center h-100 mt-5"
     >
-      <div class="col-lg-12 col-xl-11">
-        <div class="card text-black mt-5" style="border-radius: 1px">
-          <div class="card-body p-md-3" id="top">
-            <div class="h1 fw-bold mb-5 mx-1 mx-md-4">
-              <h3>Property description and price</h3>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <label class="form-label" for="form3Example3c"
-                      >Property Title</label
-                    >
-                    <input
-                      type="text"
-                      id="form3Example3c"
-                      class="form-control"
-                      name="title"
-                      placeholder="Enter your property title"
-                    />
-                  </p>
-                </div>
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black mt-5" style="border-radius: 1px">
+            <div class="card-body p-md-3" id="top">
+              <div class="h1 fw-bold mb-5 mx-1 mx-md-4">
+                <h3>Property description and price</h3>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <label class="form-label" for="description"
-                      >Property Description</label
-                    >
-                    <textarea
-                      id="description"
-                      class="form-control"
-                      name="description"
-                      rows="6"
-                      placeholder="Describe about your property"
-                    ></textarea>
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-4 col-md-12">
-                  <p>
-                    <label for="dropdownmissdcall">Status</label>
-                    <select
-                      class="form-control"
-                      name="status"
-                      id="dropdownmissdcall"
-                    >
-                      <option value="">Select Status</option>
-                      <option value="">Rent</option>
-                      <option value="">Sell</option>
-                    </select>
-                  </p>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                  <p>
-                    <label for="dropdowntype">type</label>
-                    <select class="form-control" name="type" id="dropdowntype">
-                      <option value="">Select Type</option>
-                      <option value="">house</option>
-                      <option value="">commercial</option>
-                      <option value="">apartment</option>
-                      <option value="">plot</option>
-                      <option value="">garage</option>
-                    </select>
-                  </p>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                  <p>
-                    <label for="rooms">rooms</label>
-                    <select class="form-control" name="rooms" id="rooms">
-                      <option value="">Select rooms</option>
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                    </select>
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6 col-md-12">
-                  <p>
-                    <label for="price">Price</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="price"
-                      placeholder="INR"
-                      id="price"
-                    />
-                  </p>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <p>
-                    <label for="area">Area</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="area"
-                      placeholder="Sqft"
-                      id="area"
-                    />
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card text-black mt-3" style="border-radius: 1px">
-          <div class="card-body p-md-3">
-            <div class="h1 fw-bold mb-5 mx-1 mx-md-4">
-              <h3>Property Media</h3>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <label class="form-label" for="form3Example3c"
-                      >Img Path</label
-                    >
-                    <input
-                      type="file"
-                      id="form3Example3c"
-                      class="form-control form-control-lg"
-                      name="Image"
-                      placeholder="Enter your Image Path"
-                    />
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <img
-                      src="../../../assets/Clientassets/images/single-property/s-1.jpg"
-                      height="200px"
-                      width="900px"
-                      class="img-responsive"
-                      style="border-radius: 5px; margin-top: 10px"
-                    />
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card text-black mt-3 mb-3" style="border-radius: 1px">
-          <div class="card-body p-md-3">
-            <div class="h1 fw-bold mb-5 mx-1 mx-md-4">
-              <h3>Property Location</h3>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-lg-6 col-md-12">
-                  <p>
-                    <label for="address">Address</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="address"
-                      placeholder="Enter Your Address"
-                      id="address"
-                    />
-                  </p>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <p>
-                    <label for="country">Country</label>
-                    <select
-                      [(ngModel)]="selectedCountry"
-                      (change)="onCountryChange()"
-                      class="form-control"
-                      name="country"
-                      id="country"
-                    >
-                      <option value="">Select Your Country</option>
-                      <option
-                        *ngFor="let country of countries"
-                        [value]="country.id"
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12">
+                    <p>
+                      <label class="form-label" for="form3Example3c"
+                        >Property Title</label
                       >
-                        {{ country.name }}
-                      </option>
-                    </select>
-                  </p>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="form3Example3c"
+                        placeholder="Enter your property title"
+                        name="title"
+                        ngModel
+                        required
+                      />
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p>
+                      <label class="form-label" for="description"
+                        >Property Description</label
+                      >
+                      <textarea
+                        id="description"
+                        class="form-control"
+                        placeholder="Describe about your property"
+                        name="description"
+                        rows="6"
+                        ngModel
+                        required
+                      ></textarea>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-12">
+                    <p>
+                      <label for="dropdownmissdcall">Status</label>
+                      <select
+                        class="form-control"
+                        name="status"
+                        id="dropdownmissdcall"
+                        ngModel
+                        required
+                      >
+                        <option value="">Select Status</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Sell">Sell</option>
+                      </select>
+                    </p>
+                  </div>
+                  <div class="col-lg-4 col-md-12">
+                    <p>
+                      <label for="dropdowntype">type</label>
+                      <select
+                        class="form-control"
+                        name="type"
+                        id="dropdowntype"
+                        ngModel
+                        required
+                      >
+                        <option value="">Select Type</option>
+                        <option value="house">house</option>
+                        <option value="commercial">commercial</option>
+                        <option value="apartment">apartment</option>
+                        <option value="plot">plot</option>
+                        <option value="garage">garage</option>
+                      </select>
+                    </p>
+                  </div>
+                  <div class="col-lg-4 col-md-12">
+                    <p>
+                      <label for="rooms">rooms</label>
+                      <select
+                        class="form-control"
+                        name="rooms"
+                        id="rooms"
+                        ngModel
+                        required
+                      >
+                        <option value="">Select rooms</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <p>
+                      <label for="price">Price</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="price"
+                        placeholder="INR"
+                        id="price"
+                        ngModel
+                        required
+                      />
+                    </p>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <p>
+                      <label for="area">Area</label>
+                      <input
+                        class="form-control"
+                        placeholder="Sqft"
+                        type="text"
+                        name="area"
+                        id="area"
+                        ngModel
+                        required
+                      />
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-6 col-md-12">
-                  <p>
-                    <label for="state">State</label>
-                    <select class="form-control" name="state" id="state">
-                      <option value="">Select Your State</option>
-                      <option value="">Gujarat</option>
-                    </select>
-                  </p>
+            </div>
+          </div>
+          <div class="card text-black mt-3" style="border-radius: 1px">
+            <div class="card-body p-md-3">
+              <div class="h1 fw-bold mb-5 mx-1 mx-md-4">
+                <h3>Property Media</h3>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12">
+                    <p>
+                      <label class="form-label" for="form3Example3c"
+                        >Selet Property Img </label
+                      >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input
+                        type="file"
+                        id="form3Example3c"
+                        class="form-control form-control-lg"
+                        placeholder="Enter your Image Path"
+                        name="Image"
+                        value=""
+                        ngModel
+                        required
+                      />
+                    </p>
+                  </div>
                 </div>
-                <div class="col-lg-6 col-md-12">
-                  <p>
-                    <label for="city">City</label>
-                    <select class="form-control" name="city" id="city">
-                      <option value="">Select Your City</option>
-                      <option value="">Surat</option>
-                    </select>
-                  </p>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p>
+                      <img
+                        [src]="imgPath"
+                        height="100px"
+                        width="900px"
+                        class="img-responsive"
+                        style="border-radius: 5px; margin-top: 10px"
+                      />
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-6 col-md-12">
-                  <p>
-                    <label for="latitude">Google Maps latitude</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="latitude"
-                      placeholder="Google Maps latitude"
-                      id="latitude"
-                    />
-                  </p>
+            </div>
+          </div>
+
+          <div class="card text-black mt-3 mb-3" style="border-radius: 1px">
+            <div class="card-body p-md-3">
+              <div class="h1 fw-bold mb-5 mx-1 mx-md-4">
+                <h3>Property Location</h3>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <p>
+                      <label for="address">Address</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Your Address"
+                        name="address"
+                        id="address"
+                        ngModel
+                        required
+                      />
+                    </p>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <p>
+                      <label for="country">Country</label>
+                      <select
+                        class="form-control"
+                        placeholder="Select Your Country"
+                        name="country"
+                        id="country"
+                        required
+                        [(ngModel)]="selectedCountry"
+                        (change)="onCountryChange()"
+                      >
+                        <option value="">Select Your Country</option>
+                        <option
+                          *ngFor="let country of countries"
+                          [value]="country.isoCode"
+                        >
+                          {{ country.name }}
+                        </option>
+                      </select>
+                    </p>
+                  </div>
                 </div>
-                <div class="col-lg-6 col-md-12">
-                  <p>
-                    <label for="longitude">Google Maps longitude</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="longitude"
-                      placeholder="Google Maps longitude"
-                      id="longitude"
-                    />
-                  </p>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <p>
+                      <label for="state">State</label>
+                      <select
+                        class="form-control"
+                        name="state"
+                        id="state"
+                        [(ngModel)]="selectedState"
+                        (change)="onStateChange()"
+                        required
+                      >
+                        <option value="">Select Your State</option>
+                        <option
+                          *ngFor="let state of states"
+                          [value]="state.isoCode"
+                        >
+                          {{ state.name }}
+                        </option>
+                      </select>
+                    </p>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <p>
+                      <label for="city">City</label>
+                      <select
+                        class="form-control"
+                        name="city"
+                        id="city"
+                        [(ngModel)]="selectedCity"
+                        (change)="onCityChange()"
+                        required
+                      >
+                        <option value="">Select Your City</option>
+                        <!-- <option value="">surat</option> -->
+                        <option *ngFor="let city of cities" [value]="city.name">
+                          {{ city.name }}
+                        </option>
+                      </select>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <p>
+                      <label for="latitude">Google Maps latitude</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="latitude"
+                        [(ngModel)]="latitude"
+                        placeholder="Google Maps latitude"
+                        id="latitude"
+                        required
+                      />
+                    </p>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <p>
+                      <label for="longitude">Google Maps longitude</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="longitude"
+                        [(ngModel)]="longitude"
+                        placeholder="Google Maps longitude"
+                        id="longitude"
+                        required
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card text-black mt-3 mb-3" style="border-radius: 1px">
+            <div class="card-body p-md-3">
+              <div class="h1 fw-bold mb-5 mx-1 mx-md-4">
+                <h3>Extra Information</h3>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-4 col-md-12">
+                    <p>
+                      <label for="age"
+                        >Building Age <span>(optional)</span></label
+                      >
+                      <select class="form-control" name="age" id="age" ngModel>
+                        <option value="">Select Age</option>
+                        <option value="1">0-1 years</option>
+                        <option value="4">0-5 years</option>
+                        <option value="9">0-10 years</option>
+                        <option value="14">0-15 years</option>
+                        <option value="19">0-20 years</option>
+                        <option value="49">0-50 years</option>
+                        <option value="50">50+ years</option>
+                      </select>
+                    </p>
+                  </div>
+                  <div class="col-lg-4 col-md-12">
+                    <p>
+                      <label for="bed">Bedrooms <span>(optional)</span></label>
+                      <select class="form-control" name="bed" id="bed" ngModel>
+                        <option value="">Select Bedrooms</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </p>
+                  </div>
+                  <div class="col-lg-4 col-md-12">
+                    <p>
+                      <label for="bath"
+                        >Bathrooms <span>(optional)</span></label
+                      >
+                      <select
+                        class="form-control"
+                        name="bath"
+                        id="bath"
+                        ngModel
+                      >
+                        <option value="">Select Bathrooms</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="add-property-button mb-3">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="prperty-submit-button">
+                  <button
+                    class="btn-success"
+                    style="height: 50px"
+                    type="submit"
+                  >
+                    Submit Property
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="card text-black mt-3 mb-3" style="border-radius: 1px">
-          <div class="card-body p-md-3">
-            <div class="h1 fw-bold mb-5 mx-1 mx-md-4">
-              <h3>Extra Information</h3>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-lg-4 col-md-12">
-                  <p>
-                    <label for="age"
-                      >Building Age <span>(optional)</span></label
-                    >
-                    <select class="form-control" name="age" id="age">
-                      <option value="">Select Age</option>
-                      <option value="">0-1 years</option>
-                      <option value="">0-5 years</option>
-                      <option value="">0-10 years</option>
-                      <option value="">0-15 years</option>
-                      <option value="">0-20 years</option>
-                      <option value="">0-50 years</option>
-                      <option value="">50+ years</option>
-                    </select>
-                  </p>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                  <p>
-                    <label for="bed">Bedrooms <span>(optional)</span></label>
-                    <select class="form-control" name="bed" id="bed">
-                      <option value="">Select Bedrooms</option>
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                    </select>
-                  </p>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                  <p>
-                    <label for="bath">Bathrooms <span>(optional)</span></label>
-                    <select class="form-control" name="bath" id="bath">
-                      <option value="">Select Bathrooms</option>
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                    </select>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="add-property-button mb-3">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="prperty-submit-button">
-                <button class="btn-success" style="height: 50px" type="submit">
-                  Submit Property
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </section>

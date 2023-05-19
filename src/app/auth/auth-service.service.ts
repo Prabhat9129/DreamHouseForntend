@@ -1,9 +1,22 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { post, log, updatepassword, updateProfile } from './post.model';
 import { environment } from 'src/environments/environment';
 
-import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  catchError,
+  map,
+  tap,
+  throwError,
+} from 'rxjs';
+import { User } from './user.model';
 
 export interface AuthResponseData {
   status: string;
@@ -19,10 +32,10 @@ export interface AuthResponseData {
 export class AuthServiceService {
   private apiurl = environment.API_URL;
 
-  private user = new Subject<any>();
+  private user = new Subject<User>();
   isLoggedin = new BehaviorSubject<any>(this.getUser());
   error = new Subject<any>();
-  data: Observable<any>;
+
   constructor(private http: HttpClient) {}
 
   register({ name, email, password, role }: post) {
@@ -33,7 +46,7 @@ export class AuthServiceService {
       role: role,
     };
 
-    return this.http.post<any>(`${this.apiurl}/signup`, postdata);
+    return this.http.post<AuthResponseData>(`${this.apiurl}/signup`, postdata);
   }
 
   login({ email, password }: log) {
@@ -41,7 +54,37 @@ export class AuthServiceService {
       email: email,
       password: password,
     };
-    return this.http.post<any>(`${this.apiurl}/signin`, logdata);
+    return this.http
+      .post<AuthResponseData>(`${this.apiurl}/signin`, logdata)
+      .pipe(
+        catchError(this.handleError),
+        tap((resData: any) => {
+          // console.log(resData.user);
+          const {
+            email,
+            name,
+            role,
+            number,
+            gender,
+            city_id,
+            pincode,
+            address,
+            profileImg,
+          } = resData.user;
+
+          this.handleAuthentication(
+            email,
+            name,
+            role,
+            number,
+            gender,
+            city_id,
+            pincode,
+            address,
+            profileImg
+          );
+        })
+      );
   }
 
   updatepassword({ currentpassword, newpassword, conformpassword }: any) {
@@ -86,11 +129,35 @@ export class AuthServiceService {
     formData.append('gender', user.gender);
     formData.append('pincode', user.pincode);
 
-    return this.http.patch(`${this.apiurl}/updateProfile`, formData);
-  }
+    return this.http.patch(`${this.apiurl}/updateProfile`, formData).pipe(
+      catchError(this.handleError),
+      tap((resData: any) => {
+        // console.log(resData.user);
+        const {
+          email,
+          name,
+          role,
+          contact,
+          gender,
+          city,
+          pincode,
+          address,
+          profileImg,
+        } = resData.user;
 
-  getstatecity() {
-    return this.http.get(`${this.apiurl}/countrystate`);
+        this.handleAuthentication(
+          email,
+          name,
+          role,
+          contact,
+          gender,
+          city,
+          pincode,
+          address,
+          profileImg
+        );
+      })
+    );
   }
 
   isLoggedIn(): boolean {
@@ -103,10 +170,67 @@ export class AuthServiceService {
   }
 
   getUser() {
-    return this.http.get(`${this.apiurl}/getuser`).pipe(
-      map((res: any) => {
-        return res.userdata;
-      })
+    return this.http.get(`${this.apiurl}/getuser`);
+    // .pipe(
+    //   catchError(this.handleError),
+    //   tap((resData: any) => {
+    //     console.log(resData.user);
+    //     const {
+    //       email,
+    //       name,
+    //       role,
+    //       contact,
+    //       gender,
+    //       city,
+    //       pincode,
+    //       address,
+    //       profileImg,
+    //     } = resData.user;
+
+    //     this.handleAuthentication(
+    //       email,
+    //       name,
+    //       role,
+    //       contact,
+    //       gender,
+    //       city,
+    //       pincode,
+    //       address,
+    //       profileImg
+    //     );
+    //   })
+    // );
+  }
+
+  getdata() {
+    return this.user.asObservable();
+  }
+  private handleAuthentication(
+    name: string,
+    email: string,
+    role: string,
+    contact?: number | undefined,
+    gender?: string | undefined,
+    city?: string | undefined,
+    pincode?: number | undefined,
+    address?: string | undefined,
+    profileImg?: string | undefined
+  ) {
+    const user = new User(
+      email,
+      name,
+      role,
+      contact,
+      gender,
+      city,
+      pincode,
+      address,
+      profileImg
     );
+    this.user.next(user);
+  }
+
+  private handleError(errRes: HttpErrorResponse) {
+    return throwError(errRes);
   }
 }

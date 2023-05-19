@@ -53,15 +53,6 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
         console.log(err);
       }
     );
-
-    this.service.getstatecity().subscribe(
-      (resdata) => {
-        console.log(resdata);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
   }
 
   updateuser = new FormGroup({

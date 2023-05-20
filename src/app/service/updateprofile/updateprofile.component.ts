@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
 import { CanComponentDeactivate } from './can-deactivate-gaurd.service';
+import { Country, State, City } from 'country-state-city';
 
 import { response } from 'src/app/auth/post.model';
 
@@ -17,36 +18,48 @@ import { response } from 'src/app/auth/post.model';
 export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
   ProfilePicture: File;
   imageUrl: any;
+  selectedCountry: any;
+  selectedState: any;
+  selectedCity: string;
   counter = 0;
   changeSaved = false;
   name: string;
   email: string;
   url: string;
 
+  countries: any[];
+  states: any[];
+  cities: any[];
+
   constructor(
     private router: Router,
     private service: AuthServiceService,
     private toaster: ToastrService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+    this.countries = Country.getAllCountries();
+  }
   ngOnInit(): void {
     this.service.getUser().subscribe(
       (res: any) => {
         if (res) {
-          console.log(res.userdata);
-          this.name = res.name;
-          this.email = res.email;
-          this.url = res.profileImg;
-          this.updateuser.setValue({
-            name: res.name,
-            number: res.number,
-            gender: res.gender,
-            address: res.address,
-            city_id: res.city_id,
-            pincode: res.pincode,
+          // console.log(res.userdata);
+          this.name = res.userdata.name;
+          this.email = res.userdata.email;
+          this.url = res.userdata.profileImg;
+          this.updateuser.patchValue({
+            name: res.userdata.name,
+            number: res.userdata.number,
+            gender: res.userdata.gender,
+            address: res.userdata.address,
+
+            // selectedCountry: null,
+            // selectedState: null,
+            city_id: res.userdata.city_id,
+            pincode: res.userdata.pincode,
             profileImg: null,
           });
-          console.log(this.updateuser);
+          // console.log(this.updateuser);
         }
       },
       (err) => {
@@ -60,13 +73,19 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
     number: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
+    selectCS: new FormGroup({
+      selectedCountry: new FormControl(''),
+      selectedState: new FormControl(''),
+    }),
     city_id: new FormControl('', Validators.required),
     pincode: new FormControl('', Validators.required),
     profileImg: new FormControl('', Validators.required),
   });
+  // coState = new FormGroup({});
 
   updateUser() {
-    console.log(this.updateuser);
+    this.spinner.show();
+    // console.log(this.updateuser);
 
     let authObs: Observable<any>;
     const {
@@ -118,13 +137,41 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
     if (event.target.files[0].name.length > 0 && extArr.includes(ext)) {
       const file = event.target.files[0];
       this.ProfilePicture = file;
-      console.log(this.ProfilePicture);
+      // console.log(this.ProfilePicture);
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageUrl = reader.result;
       };
     }
+  }
+
+  onCountryChange() {
+    const selectedCountry = this.updateuser.get('selectCS.selectedCountry');
+    this.selectedCountry = selectedCountry?.value;
+    console.log(selectedCountry?.value);
+    // // Reset state and city dropdowns
+    // this.updateuser.patchValue({
+    //   selectCS.selectedState: null,
+    //   selectCS.city_id: null,
+    // });
+    // // Fetch states based on the selected country
+    this.states = State.getStatesOfCountry(`${this.selectedCountry}`);
+    console.log(this.selectedCountry, this.states);
+  }
+
+  onStateChange() {
+    const selectedState = this.updateuser.get('selectCS.selectedState');
+    this.selectedState = selectedState?.value;
+    // Reset city dropdown
+    // this.updateuser.patchValue({
+    //   city_id: null,
+    // });
+    // // Fetch cities based on the selected state
+    this.cities = City.getCitiesOfState(
+      `${this.selectedCountry}`,
+      `${this.selectedState}`
+    );
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {

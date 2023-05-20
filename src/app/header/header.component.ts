@@ -15,10 +15,11 @@ import { User } from '../auth/user.model';
 })
 export class HeaderComponent implements OnInit {
   logout: boolean = false;
+  seller: boolean = false;
   token: any = '';
   name: string;
   email: string;
-  url: string;
+  url: string = '../assets/Clientassets/images/testimonials/p1.jpeg';
   err: string;
   userdata: User;
   constructor(
@@ -50,11 +51,14 @@ export class HeaderComponent implements OnInit {
     authObs = this.service.getUser();
     authObs.subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         if (res) {
           this.name = res.userdata.name;
           this.email = res.userdata.email;
           this.url = res.userdata.profileImg;
+          if (res.userdata.role === 'seller') {
+            this.seller = true;
+          }
         }
       },
       (err) => {
@@ -66,9 +70,9 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     if (this.logout) {
       localStorage.removeItem('token');
-      // this.email = '';
-      // this.name = '';
-      // this.url = '../assets/Clientassets/images/testimonials/p1.jpeg';
+      this.email = '';
+      this.name = '';
+      this.url = '../assets/Clientassets/images/testimonials/p1.jpeg';
       this.toaster.success('success', 'user Logout successfully');
       this.logout = false;
       this.router.navigate(['home']);

@@ -129,35 +129,36 @@ export class AuthServiceService {
     formData.append('gender', user.gender);
     formData.append('pincode', user.pincode);
 
-    return this.http.patch(`${this.apiurl}/updateProfile`, formData).pipe(
-      catchError(this.handleError),
-      tap((resData: any) => {
-        // console.log(resData.user);
-        const {
-          email,
-          name,
-          role,
-          contact,
-          gender,
-          city,
-          pincode,
-          address,
-          profileImg,
-        } = resData.user;
+    return this.http.patch(`${this.apiurl}/updateProfile`, formData);
+    // .pipe(
+    //   catchError(this.handleError),
+    //   tap((resData: any) => {
+    //     // console.log(resData.user);
+    //     const {
+    //       email,
+    //       name,
+    //       role,
+    //       contact,
+    //       gender,
+    //       city,
+    //       pincode,
+    //       address,
+    //       profileImg,
+    //     } = resData.user;
 
-        this.handleAuthentication(
-          email,
-          name,
-          role,
-          contact,
-          gender,
-          city,
-          pincode,
-          address,
-          profileImg
-        );
-      })
-    );
+    //     this.handleAuthentication(
+    //       email,
+    //       name,
+    //       role,
+    //       contact,
+    //       gender,
+    //       city,
+    //       pincode,
+    //       address,
+    //       profileImg
+    //     );
+    //   })
+    // );
   }
 
   isLoggedIn(): boolean {

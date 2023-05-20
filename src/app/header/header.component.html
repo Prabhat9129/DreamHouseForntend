@@ -55,25 +55,34 @@
       <!-- Left Side Content / End -->
 
       <!-- Right Side Content / End -->
+
       <div class="header-user-menu user-menu add">
         <div class="header-user-name">
-          <span><img src="{{ this.url }}" alt="" /></span>hii{{ name }}!
+          <span><img src="{{ this.url }}" alt="" /></span>hii {{ name }}!
         </div>
 
         <ul id="responsive">
           <li>
-            <a style="cursor: pointer" routerLink="/updateprofile">
+            <a
+              style="cursor: pointer"
+              *ngIf="logout"
+              routerLink="/updateprofile"
+            >
               Edit profile</a
             >
           </li>
           <li>
-            <a style="cursor: pointer" routerLink="/addproperty">
+            <a style="cursor: pointer" routerLink="/addproperty" *ngIf="seller">
               Add Property</a
             >
           </li>
-          <li><a> Payments</a></li>
+
           <li>
-            <a style="cursor: pointer" routerLink="/PasswordUpadte">
+            <a
+              style="cursor: pointer"
+              *ngIf="logout"
+              routerLink="/PasswordUpadte"
+            >
               Change Password</a
             >
           </li>

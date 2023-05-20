@@ -1,5 +1,16 @@
-<p>updateprofile works!</p>
-
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <!-- <p style="font-size: 20px; color: white">Loading...</p> -->
+  <div id="preloader">
+    <div id="status">
+      <div class="status-mes">Loading...</div>
+    </div>
+  </div>
+</ngx-spinner>
 <section class="vh-100" style="background-color: #eee">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -98,17 +109,53 @@
                             <div
                               class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
                             >
-                              <div class="form-group">
-                                <label for="state">State</label>
-                                <select
-                                  id="state"
-                                  name="state"
-                                  class="form-control"
+                              <div formGroupName="selectCS" class="row gutters">
+                                <div
+                                  class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
                                 >
-                                  <option value="">Select State</option>
+                                  <div class="form-group">
+                                    <label for="country">country</label>
+                                    <select
+                                      id="country"
+                                      name="selectedCountry"
+                                      class="form-control"
+                                      formControlName="selectedCountry"
+                                      (change)="onCountryChange()"
+                                    >
+                                      <option value="">Select Country</option>
 
-                                  <option value="1">Gujarat</option>
-                                </select>
+                                      <option
+                                        *ngFor="let country of countries"
+                                        [value]="country.isoCode"
+                                      >
+                                        {{ country.name }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div
+                                  class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
+                                >
+                                  <div class="form-group">
+                                    <label for="state">State</label>
+                                    <select
+                                      id="state"
+                                      name="selectedState"
+                                      class="form-control"
+                                      formControlName="selectedState"
+                                      (change)="onStateChange()"
+                                    >
+                                      <option value="">Select State</option>
+
+                                      <option
+                                        *ngFor="let state of states"
+                                        [value]="state.isoCode"
+                                      >
+                                        {{ state.name }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -124,7 +171,13 @@
                                   formControlName="city_id"
                                 >
                                   <option value="">Select City</option>
-                                  <option value="1">surat</option>
+
+                                  <option
+                                    *ngFor="let city of cities; let i = index"
+                                    value="{{ city.name }}"
+                                  >
+                                    {{ city.name }}
+                                  </option>
                                 </select>
                               </div>
                             </div>

@@ -1,85 +1,3 @@
-<p>contact works!</p>
-
-<!-- <section class="headings">
-  <div class="text-heading text-center">
-    <div class="container">
-      <h1>Contact Us</h1>
-      <h2><a href="index.html">Home </a> &nbsp;/&nbsp; Contact Us</h2>
-    </div>
-  </div>
-</section> -->
-<!-- END SECTION HEADINGS -->
-
-<!-- START SECTION CONTACT US -->
-<!-- <section class="contact-us">
-  <div class="container">
-    <form class="contact-form" name="contactform" method="post">
-      <div class="form-group">
-        <input
-          type="text"
-          required
-          class="form-control input-custom input-full"
-          name="name"
-          placeholder="First Name"
-          value=""
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="text"
-          required
-          class="form-control input-custom input-full"
-          name="lastname"
-          placeholder="Last Name"
-          value=""
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="number"
-          required
-          class="form-control input-custom input-full"
-          name="contactn"
-          placeholder="Contact Number"
-          value=""
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control input-custom input-full"
-          name="email"
-          placeholder="Email"
-          value=""
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="text"
-          name="refernces"
-          class="form-control input-custom input-full"
-          placeholder="Where you got refernces of this?"
-          value=""
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="text"
-          name="message"
-          class="form-control input-custom input-full"
-          placeholder="message"
-          value=""
-        />
-      </div>
-      <input
-        type="submit"
-        name="contact"
-        class="btn btn-primary btn-lg"
-        value="submit request"
-      />
-    </form>
-  </div>
-</section> -->
 <!-- <ngx-spinner
   bdColor="rgba(51,51,51,0.8)"
   size="medium"
@@ -104,7 +22,7 @@
           />
         </div>
         <div class="login">
-          <form>
+          <form [formGroup]="contactform" (ngSubmit)="onSubmit()">
             <!-- (ngSubmit)="onSubmit(f)" #f="ngForm" -->
             <!-- Email input -->
             <div class="form-outline mb-4">
@@ -114,32 +32,37 @@
                 class="form-control form-control-lg"
                 name="name"
                 type="text"
-                ngModel
-                email
-                required
-                #email="ngModel"
+                formControlName="name"
+              />
+              <!-- <div
+                *ngIf="
+                  contactform.get('name')?.invalid &&
+                  contactform.get('name')?.touched
+                "
+                style="color: red"
+              >
+                <div *ngIf="contactform.get('name')?.errors?.['required']">
+                  Name is required
+                </div>
+                <div *ngIf="contactform.get('name')?.errors?.['minLength']">
+                  Name should have minlength of 3 character
+                </div>
+              </div> -->
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form1Example14"
+                >Email address</label
+              >
+              <input
+                id="form1Example14"
+                class="form-control form-control-lg"
+                name="email"
+                type="email"
+                formControlName="email"
               />
               <!-- <span *ngIf="!email.valid && email.touched"
                 >Email Is Requried</span
               > -->
-            </div>
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form1Example13"
-                >Email address</label
-              >
-              <input
-                id="form1Example13"
-                class="form-control form-control-lg"
-                name="email"
-                type="email"
-                ngModel
-                email
-                required
-                #email="ngModel"
-              />
-              <span *ngIf="!email.valid && email.touched"
-                >Email Is Requried</span
-              >
             </div>
 
             <!-- Password input -->
@@ -151,10 +74,7 @@
                 class="form-control form-control-lg"
                 name="number"
                 id="password1"
-                ngModel
-                required
-                minlength="8"
-                #password="ngModel"
+                formControlName="number"
               />
 
               <!-- <span *ngIf="!password.valid && password.touched"
@@ -164,17 +84,14 @@
             </div>
 
             <div class="form-outline mb-4">
-              <label class="form-label" for="form1Example23">Reference</label>
+              <label class="form-label" for="form1Example24">Reference</label>
               <input
                 type="text"
-                id="form1Example23"
+                id="form1Example24"
                 placeholder="Where you got refernces?"
                 class="form-control form-control-lg"
                 name="reference"
-                id="password1"
-                ngModel
-                required
-                #password="ngModel"
+                formControlName="reference"
               />
 
               <!-- <span *ngIf="!password.valid && password.touched"
@@ -184,13 +101,14 @@
             </div>
 
             <div class="form-outline mb-4">
-              <label class="form-label" for="form1Example24">Message</label>
+              <label class="form-label" for="form1Example25">Message</label>
               <textarea
                 class="form-control form-control-lg"
                 name="message"
-                id="form1Example24"
+                id="form1Example25"
                 cols="50"
                 rows="2"
+                formControlName="message"
               >
               </textarea>
 
@@ -201,7 +119,11 @@
             </div>
             <!-- Submit button -->
             <div id="pass-info" class="clearfix"></div>
-            <button type="submit" class="btn-primary btn-lg btn-block">
+            <button
+              type="submit"
+              class="btn-primary btn-lg btn-block"
+              [disabled]="contactform.invalid"
+            >
               contact us
             </button>
           </form>
@@ -209,57 +131,4 @@
       </div>
     </div>
   </section>
-</div>
-<div class="single-add-property">
-  <h3>Contact Information</h3>
-  <div class="property-form-group">
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <p>
-          <label for="con-name">Name</label>
-          <input
-            type="text"
-            placeholder="Enter Your Name"
-            id="con-name"
-            name="con-name"
-          />
-        </p>
-      </div>
-      <div class="col-lg-6 col-md-12">
-        <p>
-          <label for="con-user">Username</label>
-          <input
-            type="text"
-            placeholder="Enter Your Username"
-            id="con-user"
-            name="con-user"
-          />
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <p class="no-mb first">
-          <label for="con-email">Email</label>
-          <input
-            type="email"
-            placeholder="Enter Your Email"
-            id="con-email"
-            name="con-email"
-          />
-        </p>
-      </div>
-      <div class="col-lg-6 col-md-12">
-        <p class="no-mb last">
-          <label for="con-phn">Phone</label>
-          <input
-            type="text"
-            placeholder="Enter Your Phone Number"
-            id="con-phn"
-            name="con-phn"
-          />
-        </p>
-      </div>
-    </div>
-  </div>
 </div>

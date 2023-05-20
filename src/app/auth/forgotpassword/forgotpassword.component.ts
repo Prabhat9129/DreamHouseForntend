@@ -20,14 +20,14 @@ export class ForgotpasswordComponent {
   ) {}
   onSubmit(forms: NgForm) {
     this.spinner.show();
-    console.log(forms.form.value.email);
+    // console.log(forms.form.value.email);
     const email = forms.form.value.email;
     let authObs: Observable<any>;
 
     authObs = this.service.forgotpassword({ email });
     authObs.subscribe(
       (resdata) => {
-        console.log(resdata);
+        // console.log(resdata);
         if (resdata.utoken !== null) {
           // localStorage.setItem('token', `Bearer ${resdata.utoken}`);
           this.toaster.success(resdata.message, resdata.status);

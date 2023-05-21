@@ -40,6 +40,17 @@
                                   formControlName="profileImg"
                                   (change)="onChange($event)"
                                 />
+                                <div
+                                *ngIf="
+                                updateuser.get('profileImg')?.invalid &&
+                                updateuser.get('profileImg')?.touched
+                                "
+                                style="color: red"
+                              >
+                                <div *ngIf="updateuser.get('profileImg')?.errors?.['required']">
+                                  Profile Image is required!
+                                </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -70,6 +81,20 @@
                                   value=""
                                   formControlName="name"
                                 />
+                                <div
+                                *ngIf="
+                                updateuser.get('name')?.invalid &&
+                                updateuser.get('name')?.touched
+                                "
+                                style="color: red"
+                              >
+                                <div *ngIf="updateuser.get('name')?.errors?.['required']">
+                                  Name is required
+                                </div>
+                                
+                                <div *ngIf="updateuser.get('name')?.errors?.['pattern']">Name should contain only alphabets and spaces.</div>
+                                <div  *ngIf="updateuser.get('name')?.errors?.['minLength']">Name should have minlength of 4 character</div>
+                              </div>
                               </div>
                             </div>
 
@@ -86,6 +111,19 @@
                                   value=""
                                   formControlName="number"
                                 />
+                                <div
+                                *ngIf="
+                                updateuser.get('number')?.invalid &&
+                                updateuser.get('number')?.touched
+                                "
+                                style="color: red"
+                              >
+                                <div *ngIf="updateuser.get('number')?.errors?.['required']">
+                                  Contact Number is required!
+                                </div>
+                                
+                                <div *ngIf="updateuser.get('number')?.errors?.['pattern']">Contact number should contain exactly 10 digits.</div>
+                                 </div>
                               </div>
                             </div>
                             <div
@@ -104,6 +142,17 @@
                                   <option value="FEMALE">Female</option>
                                   <option value="OTHER">Other</option>
                                 </select>
+                                <div
+                                *ngIf="
+                                updateuser.get('gender')?.invalid &&
+                                updateuser.get('gender')?.touched
+                                "
+                                style="color: red"
+                              >
+                                <div *ngIf="updateuser.get('gender')?.errors?.['required']">
+                                  selection of gender is required!
+                                </div>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -131,6 +180,14 @@
                                         {{ country.name }}
                                       </option>
                                     </select>
+                                    <div
+                                    *ngIf="updateuser.get('selectedCountry')?.invalid &&updateuser.get('selectedCountry')?.touched"
+                                    style="color: red"
+                                  >
+                                    <div *ngIf="updateuser.get('selectedCountry')?.errors?.['required']">
+                                      City is required!
+                                    </div>
+                                    </div>
                                   </div>
                                 </div>
                                 <div
@@ -154,6 +211,14 @@
                                         {{ state.name }}
                                       </option>
                                     </select>
+                                    <div
+                                *ngIf="updateuser.get('selectedState')?.invalid &&updateuser.get('selectedState')?.touched"
+                                style="color: red"
+                              >
+                                <div *ngIf="updateuser.get('selectedState')?.errors?.['required']">
+                                  City is required!
+                                </div>
+                                </div>
                                   </div>
                                 </div>
                               </div>
@@ -179,6 +244,14 @@
                                     {{ city.name }}
                                   </option>
                                 </select>
+                                <div
+                                *ngIf="updateuser.get('city_id')?.invalid &&updateuser.get('city_id')?.touched"
+                                style="color: red"
+                              >
+                                <div *ngIf="updateuser.get('city_id')?.errors?.['required']">
+                                  City is required!
+                                </div>
+                                </div>
                               </div>
                             </div>
 
@@ -196,6 +269,20 @@
                                   placeholder="Zip Code"
                                   formControlName="pincode"
                                 />
+                                <div
+                                *ngIf="
+                                updateuser.get('pincode')?.invalid &&
+                                updateuser.get('pincode')?.touched
+                                "
+                                style="color: red"
+                              >
+                                <div *ngIf="updateuser.get('pincode')?.errors?.['required']">
+                                  pincode is required!
+                                </div>
+                                <div *ngIf="updateuser.get('pincode')?.errors?.['pattern']">
+                                  pincode number should contain exactly 6 digit!
+                                </div>
+                               </div>
                               </div>
                             </div>
                             <div
@@ -210,6 +297,17 @@
                                   rows="1"
                                   formControlName="address"
                                 ></textarea>
+                                <div
+                                *ngIf="
+                                updateuser.get('address')?.invalid &&
+                                updateuser.get('address')?.touched
+                                "
+                                style="color: red"
+                              >
+                                <div *ngIf="updateuser.get('address')?.errors?.['required']">
+                                  Address is required!
+                                </div>
+                                </div>
                               </div>
                             </div>
                           </div>

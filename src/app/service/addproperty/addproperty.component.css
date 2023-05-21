@@ -1,3 +1,12 @@
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
 h3 {
   border-bottom: 1px solid #ddd;
   margin-bottom: 40px;
@@ -18,8 +27,8 @@ label {
   text-transform: capitalize;
 }
 p {
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
 .form-group {
   padding-top: 0px;

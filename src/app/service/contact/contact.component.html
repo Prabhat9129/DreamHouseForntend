@@ -34,7 +34,7 @@
                 type="text"
                 formControlName="name"
               />
-              <!-- <div
+              <div
                 *ngIf="
                   contactform.get('name')?.invalid &&
                   contactform.get('name')?.touched
@@ -44,11 +44,10 @@
                 <div *ngIf="contactform.get('name')?.errors?.['required']">
                   Name is required
                 </div>
-                <div *ngIf="contactform.get('name')?.errors?.['minLength']">
-                  Name should have minlength of 3 character
-                </div>
-              </div> -->
-            </div>
+                <div *ngIf="contactform.get('name')?.errors?.['pattern']">Name should contain only alphabets and spaces.</div>
+                <div  *ngIf="contactform.get('name')?.errors?.['minLength']">Name should have minlength of 4 character</div>
+              </div>
+            </div>    
             <div class="form-outline mb-4">
               <label class="form-label" for="form1Example14"
                 >Email address</label
@@ -60,9 +59,21 @@
                 type="email"
                 formControlName="email"
               />
-              <!-- <span *ngIf="!email.valid && email.touched"
-                >Email Is Requried</span
-              > -->
+              <div
+              *ngIf="
+                contactform.get('email')?.invalid &&
+                contactform.get('email')?.touched
+              "
+              style="color: red"
+            >
+              <div *ngIf="contactform.get('email')?.errors?.['required']">
+                Email is required
+              </div>
+              <div *ngIf="contactform.get('email')?.errors?.['email']">
+               Please Enter a valid email!
+               </div>
+              
+            </div>
             </div>
 
             <!-- Password input -->
@@ -76,11 +87,22 @@
                 id="password1"
                 formControlName="number"
               />
-
-              <!-- <span *ngIf="!password.valid && password.touched"
-                >Password is Required</span
-                 placeholder="Where you got refernces of this?"
-              > -->
+              <div
+              *ngIf="
+                contactform.get('number')?.invalid &&
+                contactform.get('number')?.touched
+              "
+              style="color: red"
+            >
+              <div *ngIf="contactform.get('number')?.errors?.['required']">
+                Contact number is required.
+              </div>
+              <div *ngIf="contactform.get('number')?.errors?.['pattern']">
+                Contact number should contain exactly 10 digits.  
+               </div>
+              
+            </div>
+              
             </div>
 
             <div class="form-outline mb-4">
@@ -93,11 +115,21 @@
                 name="reference"
                 formControlName="reference"
               />
+              <div
+              *ngIf="
+                contactform.get('reference')?.invalid &&
+                contactform.get('reference')?.touched
+              "
+              style="color: red"
+            >
+              <div *ngIf="contactform.get('reference')?.errors?.['required']">
+                Reference is required.
+              </div>
+              
+              
+            </div>
 
-              <!-- <span *ngIf="!password.valid && password.touched"
-                  >Password is Required</span
-                   placeholder="Where you got refernces of this?"
-                > -->
+             
             </div>
 
             <div class="form-outline mb-4">
@@ -112,17 +144,26 @@
               >
               </textarea>
 
-              <!-- <span *ngIf="!password.valid && password.touched"
-                    >Password is Required</span
-                     placeholder="Where you got refernces of this?"
-                  > -->
+              <div
+              *ngIf="
+                contactform.get('message')?.invalid &&
+                contactform.get('message')?.touched
+              "
+              style="color: red"
+            >
+              <div *ngIf="contactform.get('message')?.errors?.['required']">
+                Message is required.
+              </div>
+              
+              
+            </div>
             </div>
             <!-- Submit button -->
             <div id="pass-info" class="clearfix"></div>
             <button
               type="submit"
               class="btn-primary btn-lg btn-block"
-              [disabled]="contactform.invalid"
+              [disabled]="contactform.invalid && !buttonClicked"
             >
               contact us
             </button>

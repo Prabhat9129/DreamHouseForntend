@@ -69,8 +69,8 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
   }
 
   updateuser = new FormGroup({
-    name: new FormControl('', Validators.required),
-    number: new FormControl('', Validators.required),
+    name: new FormControl('', [Validators.required,Validators.minLength(3),Validators.pattern('[a-zA-Z]*')]),
+    number: new FormControl('', [Validators.required,Validators.pattern('[0-9]{10}')]),
     gender: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
     selectCS: new FormGroup({
@@ -78,7 +78,7 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
       selectedState: new FormControl(''),
     }),
     city_id: new FormControl('', Validators.required),
-    pincode: new FormControl('', Validators.required),
+    pincode: new FormControl('', [Validators.required,Validators.pattern('[0-9]{6}')]),
     profileImg: new FormControl('', Validators.required),
   });
   // coState = new FormGroup({});

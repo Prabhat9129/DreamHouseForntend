@@ -32,8 +32,17 @@
                         name="title"
                         ngModel
                         required
+                        minlength="3"
+                        pattern="[a-zA-Z]*"
+                        #title="ngModel"
                       />
+                      
                     </p>
+                    <div *ngIf="!title.valid && title.touched" style="color: red;">
+                      <div *ngIf="title?.errors?.['required']">Title Is Requried</div>
+                      <div *ngIf="title?.errors?.['minlength']">Title Should have more than 3 charcter</div>
+                      <div *ngIf="title?.errors?.['pattern']">Name should contain only alphabets and spaces.</div>
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -50,8 +59,14 @@
                         rows="6"
                         ngModel
                         required
+                
+                        #description="ngModel"
                       ></textarea>
                     </p>
+                    <div *ngIf="!description.valid && description.touched" style="color: red;">
+                      <div *ngIf="description?.errors?.['required']">Description is required!</div>
+                     
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -64,12 +79,17 @@
                         id="dropdownmissdcall"
                         ngModel
                         required
+                        #status="ngModel"
                       >
                         <option value="">Select Status</option>
                         <option value="Rent">Rent</option>
                         <option value="Sell">Sell</option>
                       </select>
                     </p>
+                    <div *ngIf="!status.valid && status.touched" style="color: red;">
+                      <div *ngIf="status?.errors?.['required']">Status is required!</div>
+                     
+                    </div>
                   </div>
                   <div class="col-lg-4 col-md-12">
                     <p>
@@ -80,6 +100,7 @@
                         id="dropdowntype"
                         ngModel
                         required
+                        #type="ngModel"
                       >
                         <option value="">Select Type</option>
                         <option value="house">house</option>
@@ -89,6 +110,10 @@
                         <option value="garage">garage</option>
                       </select>
                     </p>
+                    <div *ngIf="!type.valid && type.touched" style="color: red;">
+                      <div *ngIf="type?.errors?.['required']">Type is required!</div>
+                     
+                    </div>
                   </div>
                   <div class="col-lg-4 col-md-12">
                     <p>
@@ -99,6 +124,7 @@
                         id="rooms"
                         ngModel
                         required
+                        #rooms="ngModel"
                       >
                         <option value="">Select rooms</option>
                         <option value="1">1</option>
@@ -108,6 +134,10 @@
                         <option value="5">5</option>
                       </select>
                     </p>
+                    <div *ngIf="!rooms.valid && rooms.touched" style="color: red;">
+                      <div *ngIf="rooms?.errors?.['required']">Rooms is required!</div>
+                     
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -122,8 +152,13 @@
                         id="price"
                         ngModel
                         required
+                        #price="ngModel"
                       />
                     </p>
+                    <div *ngIf="!price.valid && price.touched" style="color: red;">
+                      <div *ngIf="price?.errors?.['required']">Price is required!</div>
+                     
+                    </div>
                   </div>
                   <div class="col-lg-6 col-md-12">
                     <p>
@@ -136,8 +171,13 @@
                         id="area"
                         ngModel
                         required
+                        #area="ngModel"
                       />
                     </p>
+                    <div *ngIf="!area.valid && area.touched" style="color: red;">
+                      <div *ngIf="area?.errors?.['required']">Area is required!</div>
+                     
+                    </div>
                   </div>
                 </div>
               </div>
@@ -164,8 +204,13 @@
                         value=""
                         ngModel
                         required
+                        #image="ngModel"
                       />
                     </p>
+                    <div *ngIf="!image.valid && image.touched" style="color: red;">
+                      <div *ngIf="image?.errors?.['required']">Media is required!</div>
+                     
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -203,8 +248,13 @@
                         id="address"
                         ngModel
                         required
+                        #address="ngModel"
                       />
                     </p>
+                    <div *ngIf="!address.valid && address.touched" style="color: red;">
+                      <div *ngIf="address?.errors?.['required']">Address is required!</div>
+                     
+                    </div>
                   </div>
                   <div class="col-lg-6 col-md-12">
                     <p>
@@ -217,6 +267,7 @@
                         required
                         [(ngModel)]="selectedCountry"
                         (change)="onCountryChange()"
+                        #country="ngModel"
                       >
                         <option value="">Select Your Country</option>
                         <option
@@ -227,6 +278,10 @@
                         </option>
                       </select>
                     </p>
+                    <div *ngIf="!country.valid && country.touched" style="color: red;">
+                      <div *ngIf="country?.errors?.['required']">Country is required!</div>
+                     
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -240,6 +295,7 @@
                         [(ngModel)]="selectedState"
                         (change)="onStateChange()"
                         required
+                        #state="ngModel"
                       >
                         <option value="">Select Your State</option>
                         <option
@@ -250,6 +306,10 @@
                         </option>
                       </select>
                     </p>
+                    <div *ngIf="!state.valid && state.touched" style="color: red;">
+                      <div *ngIf="state?.errors?.['required']">State is required!</div>
+                     
+                    </div>
                   </div>
                   <div class="col-lg-6 col-md-12">
                     <p>
@@ -261,6 +321,7 @@
                         [(ngModel)]="selectedCity"
                         (change)="onCityChange()"
                         required
+                        #city="ngModel"
                       >
                         <option value="">Select Your City</option>
                         <!-- <option value="">surat</option> -->
@@ -269,6 +330,10 @@
                         </option>
                       </select>
                     </p>
+                    <div *ngIf="!city.valid && city.touched" style="color: red;">
+                      <div *ngIf="city?.errors?.['required']">City is required!</div>
+                     
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -283,8 +348,10 @@
                         placeholder="Google Maps latitude"
                         id="latitude"
                         required
+                        
                       />
                     </p>
+                    
                   </div>
                   <div class="col-lg-6 col-md-12">
                     <p>
@@ -297,8 +364,10 @@
                         placeholder="Google Maps longitude"
                         id="longitude"
                         required
+                        
                       />
                     </p>
+                    
                   </div>
                 </div>
               </div>
@@ -371,6 +440,7 @@
                     class="btn-success"
                     style="height: 50px"
                     type="submit"
+                    [disabled]="f.invalid"
                   >
                     Submit Property
                   </button>

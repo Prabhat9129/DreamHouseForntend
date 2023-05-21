@@ -24,12 +24,15 @@
                         name="name"
                         ngModel
                         required
-                        minlength="5"
+                        minlength="3"
+                        pattern="[a-zA-Z]*"
                         #name="ngModel"
                       />
-                      <span *ngIf="!name.valid && name.touched"
-                        >Name is Required</span
-                      >
+                      <div *ngIf="!name.valid && name.touched" style="color:red">
+                        <div *ngIf="name?.errors?.['required']">Nameis Required!</div>
+                        <div *ngIf="name?.errors?.['minlength']">Name should have more than 3 charcter!</div>
+                        <div *ngIf="name?.errors?.['minlength']">Name should contain only alphabets and spaces.</div>
+                      </div>
                     </div>
                   </div>
 
@@ -49,9 +52,11 @@
                         email
                         #email="ngModel"
                       />
-                      <span *ngIf="!email.valid && email.touched"
-                        >Email Is Requried</span
-                      >
+                      <div *ngIf="!email.valid && email.touched" style="color:red">
+                        <div *ngIf="email?.errors?.['required']">Email Is Requried</div>  
+                        <div *ngIf="email?.errors?.['email']">Valid Email Is Requried</div>  
+                      </div>
+                     
                     </div>
                   </div>
 
@@ -72,9 +77,10 @@
                         minlength="8"
                         #password="ngModel"
                       />
-                      <span *ngIf="!password.valid && password.touched"
-                        >Password is Required</span
-                      >
+                      <div *ngIf="!password.valid && password.touched" style="color:red">
+                        <div *ngIf="password?.errors?.['required']">  Password is Required</div>
+                        <div *ngIf="password?.errors?.['minlength']">  Password should have 8 character </div>
+                      </div>
                     </div>
                   </div>
 
@@ -93,9 +99,9 @@
                         <option value="buyer">Buyer</option>
                         <option value="seller">Seller</option>
                       </select>
-                      <span *ngIf="!role.valid && role.touched"
-                        >{{ role.value }}Role is Required</span
-                      >
+                      <div *ngIf="!role.valid && role.touched" style="color:red">
+                        <div *ngIf="role?.errors?.['required']">{{ role.value }}Role is Required</div>
+                      </div>
                     </div>
                   </div>
 

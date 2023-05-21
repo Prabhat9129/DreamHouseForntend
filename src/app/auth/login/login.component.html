@@ -39,9 +39,10 @@
                 required
                 #email="ngModel"
               />
-              <span *ngIf="!email.valid && email.touched"
-                >Email Is Requried</span
-              >
+              <div *ngIf="!email.valid && email.touched" style="color: red;">
+                <div *ngIf="email?.errors?.['required']">Email Is Requried</div>
+                <div *ngIf="email?.errors?.['email']">Enter a valid email</div>
+              </div>
             </div>
 
             <!-- Password input -->
@@ -60,8 +61,10 @@
                 #password="ngModel"
               />
 
-              <span *ngIf="!password.valid && password.touched"
-                >Password is Required</span
+              <div *ngIf="!password.valid && password.touched" style="color:red">
+                <div *ngIf="password?.errors?.['required']">Password Is Requried</div>
+                <div *ngIf="password?.errors?.['minlength']">Password should have 8 character</div>
+              </div
               >
             </div>
 

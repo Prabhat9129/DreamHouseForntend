@@ -10,18 +10,12 @@
     <div class="status-mes"></div>
   </div>
 </div>
+
 </ngx-spinner> -->
 <!-- Wrapper -->
 <div id="wrapper">
-  <!-- START SECTION HEADINGS -->
-  <!-- Header Container================================================== -->
- 
- 
-  <app-header *ngIf="rendHeader"></app-header>
   <div class="clearfix"></div>
-  <!-- Header Container / End -->
-
-  <!-- STAR HEADER SEARCH -->
+  <app-header  *ngIf="!hideHeader"></app-header>
   <router-outlet></router-outlet>
-  <!-- END HEADER SEARCH -->
+ 
 </div>

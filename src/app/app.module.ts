@@ -20,17 +20,25 @@ import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.co
 import { ResetpasswordComponent } from './auth/resetpassword/resetpassword.component';
 import { UpdateprofileComponent } from './service/updateprofile/updateprofile.component';
 import { FooterComponent } from './footer/footer.component';
-import { AdminModuleModule } from './admin-module/admin-module.module';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './auth/auth-guard';
-import { LoginModelComponent } from './auth/login-model/login-model.component';
 import { CanDeactivateGaurd } from './service/updateprofile/can-deactivate-gaurd.service';
 import { AddpropertyComponent } from './service/addproperty/addproperty.component';
 import { ContactComponent } from './service/contact/contact.component';
 import { AboutusComponent } from './service/aboutus/aboutus.component';
 import { PropertiesFullListComponent } from './service/properties-full-list/properties-full-list.component';
 import { PropertiesDetailsComponent } from './service/properties-details/properties-details.component';
+import { PropertyService } from './services/property.service';
+import { AdminComponent } from './admin/admin.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AddpropertytypeComponent } from './admin/addpropertytype/addpropertytype.component';
+import { AdminService } from './services/admin.service';
+import { ViewpropertytypeComponent } from './admin/viewpropertytype/viewpropertytype.component';
+import { UpdatepropertytypeComponent } from './admin/updatepropertytype/updatepropertytype.component';
+import { PropertiesComponent } from './admin/properties/properties.component';
+import { UsersComponent } from './admin/users/users.component';
+import { BookingComponent } from './admin/booking/booking.component';
 
 @NgModule({
   declarations: [
@@ -46,12 +54,19 @@ import { PropertiesDetailsComponent } from './service/properties-details/propert
     UpdateprofileComponent,
     FooterComponent,
     NotFoundComponent,
-    LoginModelComponent,
     AddpropertyComponent,
     ContactComponent,
     AboutusComponent,
     PropertiesFullListComponent,
     PropertiesDetailsComponent,
+    AdminComponent,
+    DashboardComponent,
+    AddpropertytypeComponent,
+    ViewpropertytypeComponent,
+    UpdatepropertytypeComponent,
+    PropertiesComponent,
+    UsersComponent,
+    BookingComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +82,6 @@ import { PropertiesDetailsComponent } from './service/properties-details/propert
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminModuleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -77,6 +91,8 @@ import { PropertiesDetailsComponent } from './service/properties-details/propert
       multi: true,
     },
     AuthServiceService,
+    PropertyService,
+    AdminService,
     AuthGuard,
     CanDeactivateGaurd,
   ],

@@ -30,7 +30,7 @@ export class ContactComponent {
     console.log(this.contactform);
     if(this.contactform.invalid){
 this.contactform.markAllAsTouched();
-return
+return;
     }
     else{
 

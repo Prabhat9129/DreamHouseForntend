@@ -1,0 +1,40 @@
+<div class="pagetitle">
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Users</li>
+      </ol>
+    </nav>
+</div>
+<div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Users</h5>
+
+        <!-- Table with stripped rows -->
+        <table class="table table-striped">
+          <thead>
+            <tr >
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">email</th>
+              <th scope="col">role</th>
+
+              <!-- *ngFor="let property of users; let i=index" -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr  *ngFor="let user of users; let i=index" >
+              <th scope="row">{{i}}</th>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.role}}</td>
+
+              
+             
+            </tr>
+           </tbody>
+        </table>
+      </div>
+    </div>
+</div>

@@ -4,3 +4,11 @@ input.ng-invalid.ng-touched {
 select.ng-invalid.ng-touched {
   border: 1px solid red;
 }
+.custom-button {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.disabled {
+  pointer-events: none;
+}

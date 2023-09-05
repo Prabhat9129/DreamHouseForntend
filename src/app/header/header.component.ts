@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ChangeDetectorRef, HostListener  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {
@@ -14,68 +14,58 @@ import { User } from '../auth/user.model';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  logout: boolean = false;
-  seller: boolean = false;
+  isLogged: boolean;
   token: any = '';
-  name: string;
-  email: string;
-  url: string = '../assets/Clientassets/images/testimonials/p1.jpeg';
-  err: string;
-  userdata: User;
+  seller:boolean=false;
+  role:string;
+  name:string;
+  email:string;
+  url:string | undefined ;
+  userData: User;
+
   constructor(
     private toaster: ToastrService,
     private router: Router,
-    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
     private service: AuthServiceService
   ) {}
+  
   ngOnInit(): void {
-    // this.service.getdata().subscribe((userdata: User) => {
-    //   this.userdata = userdata;
+    this.service.isLogged.subscribe((res) => {
+      this.isLogged = res;
+    });
 
-    //   console.log(userdata.name);
-    //   this.name = userdata.name;
-    //   this.email = userdata.email;
-    //   // this.url = userdata.profileImg;
-    //   console.log(this.userdata);
-    //   console.log(this.name);
-    // });
-    // console.log(this.name);
-
-    this.token = localStorage.getItem('token');
-    if (this.token) {
-      this.logout = true;
-    }
-    this.service.getUser();
-
-    let authObs: Observable<any>;
-    authObs = this.service.getUser();
-    authObs.subscribe(
-      (res) => {
-        // console.log(res);
-        if (res) {
-          this.name = res.userdata.name;
-          this.email = res.userdata.email;
-          this.url = res.userdata.profileImg;
-          if (res.userdata.role === 'seller') {
-            this.seller = true;
-          }
-        }
-      },
-      (err) => {
-        this.err = err;
+    this.service.role.subscribe((res)=>{
+      console.log(res);
+      this.role=res;
+      if(res==="seller"){
+        this.seller=true;
       }
-    );
+
+    });
+
+    this.service.user.subscribe((userdata: User) => {
+      console.log(userdata);
+      console.log(userdata.role);
+      this.userData = userdata;
+      this.name=this.userData.name;
+      this.url=this.userData.profileImg;
+      if(userdata.role==="seller")
+      {
+        this.seller=true
+      }
+      console.log(this.userData)
+    }); 
   }
 
   onLogout() {
-    if (this.logout) {
       localStorage.removeItem('token');
       this.email = '';
       this.name = '';
       this.url = '../assets/Clientassets/images/testimonials/p1.jpeg';
       this.toaster.success('success', 'user Logout successfully');
-      this.logout = false;
+      this.service.isLogged.next(false);
+      this.service.role.next("");
       this.router.navigate(['home']);
-    }
   }
 }

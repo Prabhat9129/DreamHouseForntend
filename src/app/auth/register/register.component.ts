@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthResponseData, AuthServiceService } from '../auth-service.service';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import {  AuthServiceService } from '../auth-service.service';
+import {  NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-register',
@@ -14,41 +13,53 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class RegisterComponent implements OnInit {
   registerdata: any = { name: null, email: null, password: null, role: null };
-
+  @ViewChild('f', { static: false }) forms: NgForm
+  invalidFormsClicked=false
+  formHovered =false
   ngOnInit(): void {}
 
-  constructor(
-    private router: Router,
+  constructor(  
     private service: AuthServiceService,
+    private spinner:NgxSpinnerService,
     private toaster: ToastrService,
-    private spinner: NgxSpinnerService
   ) {}
+  showFormInvalidMessage(){
+    if(this.forms.invalid){
+      this.invalidFormsClicked=true
+      this.formHovered =true
+          }
+  }
 
-  onSubmit(forms: NgForm) {
-    this.spinner.show();
-    console.log(forms);
-    this.registerdata.name = forms.form.value.name;
-    this.registerdata.email = forms.form.value.email;
-    this.registerdata.password = forms.form.value.password;
-    this.registerdata.role = forms.form.value.role;
-    const { name, email, password, role } = this.registerdata;
+  
+  onSubmit() {
+    
+    if(this.forms.valid){
+      this.spinner.show();
+      console.log(this.forms);
+      this.registerdata.name = this.forms.form.value.name;
+      this.registerdata.email = this.forms.form.value.email;
+      this.registerdata.password = this.forms.form.value.password;
+      this.registerdata.role = this.forms.form.value.role;
+      const { name, email, password, role } = this.registerdata;
 
-    let authObs = new Observable<AuthResponseData>();
+      this.service.register({ name, email, password, role });
 
-    authObs = this.service.register({ name, email, password, role });
+    }
+    else
+    {
+      
+      console.log("form is not valid")
 
-    authObs.subscribe(
-      (resdata) => {
-        console.log(resdata);
-        this.toaster.success(resdata.message, resdata.status);
-        this.spinner.hide();
-        this.router.navigate(['/login']);
-      },
-      (err) => {
-        console.log(err);
-        this.toaster.error(err.error.message, err.error.status);
-        this.spinner.hide();
+      const emptyFields = Object.keys(this.forms.controls).filter(
+        (key) => this.forms.controls[key].errors?.['required']
+        
+      );
+      
+      if (emptyFields.length > 0) {
+        const errorMessage = `Please fill in the following fields: ${emptyFields.join(', ')}`;
+        this.toaster.success("please fill all field", "invalid form");
+        // Show the error message or take appropriate action
       }
-    );
+    }
   }
 }

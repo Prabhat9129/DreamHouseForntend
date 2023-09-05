@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
 import { CanComponentDeactivate } from './can-deactivate-gaurd.service';
 import { Country, State, City } from 'country-state-city';
-
 import { response } from 'src/app/auth/post.model';
 
 @Component({
@@ -26,7 +25,6 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
   name: string;
   email: string;
   url: string;
-
   countries: any[];
   states: any[];
   cities: any[];
@@ -52,14 +50,10 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
             number: res.userdata.number,
             gender: res.userdata.gender,
             address: res.userdata.address,
-
-            // selectedCountry: null,
-            // selectedState: null,
             city_id: res.userdata.city_id,
             pincode: res.userdata.pincode,
             profileImg: null,
           });
-          // console.log(this.updateuser);
         }
       },
       (err) => {
@@ -74,20 +68,17 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
     gender: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
     selectCS: new FormGroup({
-      selectedCountry: new FormControl(''),
-      selectedState: new FormControl(''),
+      selectedCountry: new FormControl('',Validators.required),
+      selectedState: new FormControl('',Validators.required),
     }),
     city_id: new FormControl('', Validators.required),
     pincode: new FormControl('', [Validators.required,Validators.pattern('[0-9]{6}')]),
     profileImg: new FormControl('', Validators.required),
   });
-  // coState = new FormGroup({});
 
   updateUser() {
     this.spinner.show();
     // console.log(this.updateuser);
-
-    let authObs: Observable<any>;
     const {
       name,
       email,
@@ -100,7 +91,7 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
       pincode,
     }: any = this.updateuser.value;
 
-    authObs = this.service.updateprofile(this.ProfilePicture, {
+    this.service.updateprofile(this.ProfilePicture, {
       name: name,
       email: email,
       password: password,
@@ -111,23 +102,6 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
       city_id: city_id,
       pincode: pincode,
     });
-
-    authObs.subscribe(
-      (resdata) => {
-        console.log(resdata.user);
-        if (resdata.utoken !== null) {
-          localStorage.setItem('token', `Bearer ${resdata.utoken}`);
-          this.toaster.success(resdata.message, resdata.status);
-          this.spinner.hide();
-          this.router.navigate(['/home']);
-        }
-      },
-      (err) => {
-        console.log(err);
-        this.toaster.error(err.error.message, err.error.status);
-        this.spinner.hide();
-      }
-    );
   }
 
   onChange(event: any) {
@@ -150,12 +124,6 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
     const selectedCountry = this.updateuser.get('selectCS.selectedCountry');
     this.selectedCountry = selectedCountry?.value;
     console.log(selectedCountry?.value);
-    // // Reset state and city dropdowns
-    // this.updateuser.patchValue({
-    //   selectCS.selectedState: null,
-    //   selectCS.city_id: null,
-    // });
-    // // Fetch states based on the selected country
     this.states = State.getStatesOfCountry(`${this.selectedCountry}`);
     console.log(this.selectedCountry, this.states);
   }
@@ -163,11 +131,6 @@ export class UpdateprofileComponent implements OnInit, CanComponentDeactivate {
   onStateChange() {
     const selectedState = this.updateuser.get('selectCS.selectedState');
     this.selectedState = selectedState?.value;
-    // Reset city dropdown
-    // this.updateuser.patchValue({
-    //   city_id: null,
-    // });
-    // // Fetch cities based on the selected state
     this.cities = City.getCitiesOfState(
       `${this.selectedCountry}`,
       `${this.selectedState}`

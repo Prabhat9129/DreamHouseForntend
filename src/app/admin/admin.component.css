@@ -1,0 +1,41 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height:40px;
+    z-index: 997;
+    transition: all 0.3s;
+    padding: 20px;
+    
+    /* scrollbar-width: thin;
+    scrollbar-color: #aab7cf transparent; */
+    box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+    background-color: #fff;
+  }
+  .align-items-center {
+      align-items: center!important;
+  }
+  .d-flex {
+      display: flex!important;
+  }
+  .fixed-top {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1030;
+  }
+  .header .toggle-sidebar-btn {
+    font-size: 32px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: #012970;
+}
+::marker {
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+    text-indent: 0px !important;
+    text-align: start !important;
+    text-align-last: start !important;
+}

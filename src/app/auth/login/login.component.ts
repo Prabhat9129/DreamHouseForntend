@@ -33,25 +33,25 @@ export class LoginComponent implements OnInit {
     this.logindata.password = forms.form.value.password;
     const { email, password } = this.logindata;
 
-    let authObs: Observable<AuthResponseData>;
+    // let authObs: Observable<AuthResponseData>;
 
-    authObs = this.service.login({ email, password });
+    this.service.login({ email, password });
 
-    authObs.subscribe(
-      (resdata) => {
-        console.log(resdata.user);
-        if (resdata.utoken !== null) {
-          localStorage.setItem('token', `Bearer ${resdata.utoken}`);
-          this.toaster.success(resdata.message, resdata.status);
-          this.spinner.hide();
-          this.router.navigate(['/home']);
-        }
-      },
-      (err) => {
-        console.log(err);
-        this.toaster.error(err.error.message, err.error.status);
-        this.spinner.hide();
-      }
-    );
+    // authObs.subscribe(
+    //   (resdata) => {
+    //     console.log(resdata.user);
+    //     if (resdata.utoken !== null) {
+    //       localStorage.setItem('token', `Bearer ${resdata.utoken}`);
+    //       this.toaster.success(resdata.message, resdata.status);
+    //       this.spinner.hide();
+    //       this.router.navigate(['/home']);
+    //     }
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //     this.toaster.error(err.error.message, err.error.status);
+    //     this.spinner.hide();
+    //   }
+    // );
   }
 }

@@ -47,7 +47,7 @@
 
             <!-- Password input -->
             <div class="form-outline mb-4">
-              <label class="form-label" for="form1Example23">Password</label>
+              <label class="form-label" for="password1">Password</label>
               <input
                 type="password"
                 id="form1Example23"
@@ -58,12 +58,14 @@
                 ngModel
                 required
                 minlength="8"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
                 #password="ngModel"
               />
 
               <div *ngIf="!password.valid && password.touched" style="color:red">
-                <div *ngIf="password?.errors?.['required']">Password Is Requried</div>
-                <div *ngIf="password?.errors?.['minlength']">Password should have 8 character</div>
+                <div *ngIf="password?.errors?.['required']">Password Is Requried! </div>
+                <div *ngIf="password?.errors?.['minlength']">Password should have 8 character!</div>
+                <div *ngIf="password?.errors?.['pattern']">Password should have one capital, one small, one special character and one number!</div>
               </div
               >
             </div>

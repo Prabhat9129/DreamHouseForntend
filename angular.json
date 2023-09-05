@@ -20,13 +20,15 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/Clientassets/favicon.ico",
-              "src/assets/Clientassets"
+              "src/assets/Clientassets",
+              "src/assets/assets"
+              
             ],
             "styles": [
               "./src/styles.css",
-              "./src/assets/Clientassets/css/maps.css",
               "./src/assets/Clientassets/css/styles.css",
               "./src/assets/Clientassets/css/menu.css",
+              "./src/assets/assets/css/style.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/ngx-spinner/animations/square-jelly-box.css"
             ],
@@ -37,6 +39,10 @@
               "./src/assets/Clientassets/js/jquery.validate.min.js",
               "./src/assets/Clientassets/js/mmenu.min.js",
               "./src/assets/Clientassets/js/moment.js",
+              "./src/assets/assets/js/main.js",
+              "./src/assets/assets/vendor/chart.js/chart.umd.js",
+              "./src/assets/assets/vendor/echarts/echarts.min.js",
+              "./src/assets/assets/vendor/quill/quill.min.js",
               "./src/assets/Clientassets/js/color-switcher.js",
               "./src/assets/Clientassets/js/Countdown.min.js",
               "./src/assets/Clientassets/js/datedropper.js",

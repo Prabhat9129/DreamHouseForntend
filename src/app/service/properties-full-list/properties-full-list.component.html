@@ -21,7 +21,7 @@
                 </div>
                 <div class="rld-single-select">
                   <select class="select single-select mr-0">
-                    <option value="1">Location</option>
+                    <option value="1">city</option>
                     <option value="2">Los Angeles</option>
                     <option value="3">Chicago</option>
                     <option value="3">Philadelphia</option>
@@ -30,7 +30,7 @@
                     <option value="3">Houston</option>
                   </select>
                 </div>
-                <div class="dropdown-filter"><span>Advanced Search</span></div>
+                
                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
                   <a class="btn btn-yellow" href="#">Search Now</a>
                 </div>
@@ -220,25 +220,25 @@
         </div>
       </div>
     </section>
-    <div class="row featured portfolio-items">
+    <div class="row featured portfolio-items" *ngFor="let property of properties">
       <div class="item col-lg-4 col-md-12 col-xs-12 landscapes sale pr-0 pb-0">
         <div class="project-single mb-0 bb-0">
           <div class="project-inner project-head">
-            <div class="homes">
+            <div class="homes" [routerLink]="['/propertydetail/',property._id]">
               <!-- homes img -->
-              <a href="single-property-1.html" class="homes-img">
+              <a href="" class="homes-img" >
                 <div class="homes-tag button alt featured">Featured</div>
-                <div class="homes-tag button alt sale">For Sale</div>
-                <div class="homes-price">$9,000/mo</div>
+                <div class="homes-tag button alt sale">For {{property.status}}</div>
+                <div class="homes-price">{{property.price}}</div>
                 <img
-                  src="../../../assets/Clientassets/images/blog/b-11.jpg"
+                  src={{property.image}}
                   alt="home-1"
                   class="img-responsive"
                 />
               </a>
             </div>
             <div class="button-effect">
-              <a routerLink="/propertydetail" class="btn"
+              <a [routerLink]="['/propertydetail/',property._id]" class="btn"
                 ><i class="fa fa-link"></i
               ></a>
               <a
@@ -246,7 +246,7 @@
                 class="btn popup-video popup-youtube"
                 ><i class="fas fa-video"></i
               ></a>
-              <a href="single-property-2.html" class="img-poppu btn"
+              <a href="" class="img-poppu btn"
                 ><i class="fa fa-photo"></i
               ></a>
             </div>
@@ -256,30 +256,30 @@
       <!-- homes content -->
       <div class="col-lg-8 col-md-12 homes-content pb-0 mb-44">
         <!-- homes address -->
-        <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
+        <h3><a href="l">{{property.title}}</a></h3>
         <p class="homes-address mb-3">
-          <a href="single-property-1.html">
+          <a href="">
             <i class="fa fa-map-marker"></i
-            ><span>Est St, 77 - Central Park South, NYC</span>
+            ><span>{{property.address}}</span>
           </a>
         </p>
         <!-- homes List -->
         <ul class="homes-list clearfix">
           <li>
-            <span>6 Beds</span>
+            <span>{{property.bed}}Beds</span>
           </li>
           <li>
-            <span>3 Baths</span>
+            <span>{{property.bath}} Baths</span>
           </li>
           <li>
-            <span>720 sq ft</span>
+            <span>{{property.area}} sq ft</span>
           </li>
           <li>
             <span>2 Garages</span>
           </li>
         </ul>
         <div class="footer">
-          <a href="agent-details.html">
+          <a href="agent-details.html" >
             <img
               src="../../../assets/Clientassets/images/testimonials/ts-1.jpg"
               alt=""

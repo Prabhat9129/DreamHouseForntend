@@ -1,10 +1,10 @@
 <header id="header-container">
   <!-- Header -->
-  <div id="header">
+  <div id="header" >
     <div class="container container-header">
-      <!-- Left Side Content -->
+     
       <div class="left-side">
-        <!-- Logo -->
+    
         <div id="logo">
           <a routerLink="/"
             ><img
@@ -12,7 +12,7 @@
               alt="Dream House"
           /></a>
         </div>
-        <!-- Mobile Navigation -->
+        
         <div class="mmenu-trigger">
           <button class="hamburger hamburger--collapse" type="button">
             <span class="hamburger-box">
@@ -20,11 +20,12 @@
             </span>
           </button>
         </div>
-        <!-- Main Navigation -->
+        
         <nav id="navigation" class="style-1">
           <ul id="responsive">
             <li>
               <a style="cursor: pointer" routerLink="home">Home</a>
+              
             </li>
 
             <li>
@@ -35,44 +36,42 @@
             <li>
               <a style="cursor: pointer" routerLink="about">About us</a>
             </li>
+            
             <li class="d-none d-xl-none d-block d-lg-block">
-              <a style="cursor: pointer" routerLink="/login" *ngIf="!logout"
+              <a style="cursor: pointer" routerLink="/login" *ngIf="!isLogged"
                 >Login</a
               >
-              <a style="cursor: pointer" (click)="onLogout()" *ngIf="logout"
+              <a style="cursor: pointer" (click)="onLogout()" *ngIf="isLogged"
                 >Logout</a
               >
             </li>
             <li class="d-none d-xl-none d-block d-lg-block">
-              <a style="cursor: pointer" routerLink="/signup" *ngIf="!logout"
+              <a style="cursor: pointer" routerLink="/signup" *ngIf="!isLogged"
                 >Register</a
               >
             </li>
           </ul>
         </nav>
-        <!-- Main Navigation / End -->
+       
       </div>
-      <!-- Left Side Content / End -->
-
-      <!-- Right Side Content / End -->
-
+      
       <div class="header-user-menu user-menu add">
         <div class="header-user-name">
-          <span><img src="{{ this.url }}" alt="" /></span>hii {{ name }}!
+          <span><img src="{{url}}" alt="" /></span>hii {{ name }}!
         </div>
 
         <ul id="responsive">
           <li>
             <a
               style="cursor: pointer"
-              *ngIf="logout"
               routerLink="/updateprofile"
+             *ngIf="isLogged"
             >
               Edit profile</a
             >
           </li>
           <li>
-            <a style="cursor: pointer" routerLink="/addproperty" *ngIf="seller">
+            <a style="cursor: pointer" routerLink="/addproperty" *ngIf="isLogged && seller" >
               Add Property</a
             >
           </li>
@@ -80,37 +79,36 @@
           <li>
             <a
               style="cursor: pointer"
-              *ngIf="logout"
               routerLink="/PasswordUpadte"
+              *ngIf="isLogged"
             >
               Change Password</a
             >
           </li>
           <li>
-            <a style="cursor: pointer" (click)="onLogout()" *ngIf="logout"
+            <a style="cursor: pointer" (click)="onLogout()" *ngIf="isLogged"
               >Log Out</a
             >
           </li>
         </ul>
       </div>
-      <!-- Right Side Content / End -->
-
+      
       <div class="right-side d-none d-none d-lg-none d-xl-flex sign ml-0">
-        <!-- Header Widget -->
+        
         <div class="header-widget sign-in">
           <div class="show-reg-form modal-open">
-            <a style="cursor: pointer" routerLink="/login" *ngIf="!logout"
+            <a style="cursor: pointer" routerLink="/login" *ngIf="!isLogged"
               >Sign In</a
             >
-            <a style="cursor: pointer" (click)="onLogout()" *ngIf="logout"
+            <a style="cursor: pointer" (click)="onLogout()" *ngIf="isLogged"
               >Logout</a
             >
           </div>
         </div>
-        <!-- Header Widget / End -->
+        
       </div>
-      <!-- Right Side Content / End -->
+     
     </div>
   </div>
-  <!-- Header / End -->
+ 
 </header>
